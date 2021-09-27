@@ -8,5 +8,10 @@ namespace TaskDeskApp
         {
             InitializeComponent();
         }
+
+        private void Button_Create_OnSelected(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Работает");
+        }
     }
 }
