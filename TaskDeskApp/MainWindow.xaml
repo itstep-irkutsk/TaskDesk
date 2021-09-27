@@ -6,7 +6,35 @@
         xmlns:local="clr-namespace:TaskDeskApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+    <Grid ShowGridLines="True">
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Головное меню" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+                <TextBlock Text="Основные функции" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="14" Foreground="Blue" FontWeight="Bold"/>
+                <ListView>
+                    <ListViewItem x:Name="Button_Create" Selected="Button_Create_OnSelected">
+                       Создать событие
+                    </ListViewItem>
+                    <ListViewItem >
+                        Сделать Еще что-нибудь
+                    </ListViewItem>
+                    <ListViewItem >
+                        Удалить событие
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+            
+       </Grid>
+        
+        
     </Grid>
 </Window>
