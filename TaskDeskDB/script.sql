@@ -19,7 +19,7 @@ create table table_task
     execution_date TEXT NOT NULL,
     status_id      INTEGER NOT NULL,
     priority_id    INTEGER NOT NULL,
-    hidden         INTEGER NOT NULL
+    is_deleted     INTEGER NOT NULL
 );
 
 
