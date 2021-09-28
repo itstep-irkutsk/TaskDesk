@@ -3,10 +3,110 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+       
         xmlns:local="clr-namespace:TaskDeskApp"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MaterialDesignWindow}">
+    <!--<Window.CommandBindings>
+        <CommandBinding Command="Copy" Executed="OnCopy"/>
+    </Window.CommandBindings>-->
+   <Window.Resources>
+       <Style TargetType="Button">
+           <Setter Property="Margin" Value="10"/>
+       </Style>
+   </Window.Resources>
+  
+    <Grid ShowGridLines="True">
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DataGridRow Grid.Row="0" Background="#673AB7"/>
+        <DataGridRow Grid.Row="1" Background="White"/>
+        <!--<TextBlock Text="Планировщик задач" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>-->
+        <materialDesign:ColorZone
+            Mode="PrimaryDark"
+            Padding="16">
+            <StackPanel
+                Orientation="Horizontal">
+                <ToggleButton
+                    Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Margin="16 0 0 0"
+                    Text="Наш планировщик задач" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="WithBTN" Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Background="#673AB7">
+                <TextBlock Text="Основные функции" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="14" Foreground="Blue" FontWeight="Bold"/>
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="{Binding ElementName=WithBTN, Path = Width}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Content="Создать событие"
+                    Click="ButtonBase_OnClick"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="{Binding ElementName=WithBTN, Path = Width}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Content="Сделать Еще что-нибудь"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="{Binding ElementName=WithBTN, Path = Width}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Content="Удалить событие"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            </StackPanel>
+            <Grid Grid.Column="1" x:Name="Calendar" ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+             
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Понедельник" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Вторник" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Среда" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Четверг" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Пятница" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="5" Text="Суббота" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="6" Text="Воскресенье" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
+                
+            </Grid>
+       </Grid>
+        
+        
     </Grid>
 </Window>
