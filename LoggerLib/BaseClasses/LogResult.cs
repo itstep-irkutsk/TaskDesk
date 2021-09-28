@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoggerLib
+namespace LoggerLib.BaseClasses
 {
-    interface ILogger
-    {
+ public enum LogMeaning{
+        Informing,
+        Success,
+        Fail,
+        Error
     }
 }
