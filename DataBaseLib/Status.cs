@@ -2,8 +2,8 @@
 {
     public enum Status
     {
-        InTheWork,
         NotTheWork,
+        InTheWork,
         Done
     }
 }

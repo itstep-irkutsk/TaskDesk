@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 
@@ -7,16 +8,19 @@ namespace DataBaseLib
     public class DataBase
     {
         private string db;
+        private string nameTable;
         static SQLiteConnection connection;
         static SQLiteCommand command;
 
         public DataBase()
         {
             db = "SQLiteDB.sqlite";
+            nameTable = "table_task";
         }
         public DataBase(string nameDB)
         {
             db = $"{nameDB}.sqlite";
+            nameTable = "table_task";
         }
 
         public bool Connect()
@@ -42,62 +46,48 @@ namespace DataBaseLib
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task CreateTableAsinc(string nameTable, string column)
-        {
-            var reqvest = $"CREATE TABLE IF NOT EXISTS [{nameTable}]({column});";
-            await ReqvestAsync(reqvest);
-        }
-        
-        public async Task CreateTableAsinc(string nameTable, TableData data)
+        public async Task CreateTableAsinc()
         {
             var reqvest = $"create table {nameTable} (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,description TEXT,creation_date TEXT NOT NULL,execution_date TEXT NOT NULL,status_id INTEGER NOT NULL,priority_id INTEGER NOT NULL,is_deleted INTEGER NOT NULL);";
             await ReqvestAsync(reqvest);
         }
-        
-        public async Task AddDataInTableAsinc(string nameTable, string column, string data)
-        {
-            var reqvest = $"INSERT INTO {nameTable} ({column}) VALUES ({data})";
-            await ReqvestAsync(reqvest);
-        }
-        
-        public async Task AddDataInTableAsinc(string nameTable, TableData data)
+
+        public async Task AddDataInTableAsinc(TableData data)
         {
             
-            var reqvest = $"INSERT INTO {nameTable} (name, description, creation_date, execution_date, status_id, priority_id,) VALUES ('{data.name}' , '{data.description}' , '{data.creation_date}' , '{data.execution_date}' , '{data.status})' , '{data.priority}'";
+            var reqvest = $"INSERT INTO {nameTable} (name, description, creation_date, execution_date, status_id, priority_id , is_deleted) VALUES ('{data.name}' , '{data.description}' , '{data.creation_date}' , '{data.execution_date}' , '{data.status}' , '{data.priority}' , '{data.is_deleted}')";
+            await ReqvestAsync(reqvest);
+        }
+
+        public async Task EditDataInTableAsinc(TableData data)
+        {
+            var reqvest = $"UPDATE {nameTable} SET name = ‘{data.name}’, description = '{data.description}' ,  creation_date = '{data.creation_date}', execution_date = '{data.execution_date}, status_id = '{data.status}, priority_id = '{data.priority}', is_deleted = '{data.is_deleted}' WHERE id = {data.id};"; //Todo Написать cтроку для изменения
             await ReqvestAsync(reqvest);
         }
         
-        public async Task EditDataInTableAsinc(string nameTable, string column, string data)
+        public async Task<List<TableData>> ReadDataInTableAsinc()
         {
-            var reqvest = $""; //Todo Написать cтроку для изменения
-            await ReqvestAsync(reqvest);
-        }
-        
-        public async Task EditDataInTableAsinc(string nameTable, TableData data)
-        {
-            var reqvest = $""; //Todo Написать cтроку для изменения
-            await ReqvestAsync(reqvest);
-        }
-        
-        public async Task<List<TableData>> ReadDataInTableAsinc(string nameTable)
-        {
-            TableData data = null;
-            List<TableData> tableDatas = null;
-                
+            
+            List<TableData> tableDatas = new List<TableData>();
+
             var sqlite_select_query = $"SELECT * from {nameTable}";
             SQLiteCommand command = new SQLiteCommand(sqlite_select_query, connection);
             SQLiteDataReader reader = command.ExecuteReader();
+            
             while (reader.Read())
             {
-                data.id = (int) reader[0];
-                data.name = (string) reader[1];
-                data.description = (string) reader[2];
-                data.creation_date = (string) reader[3];
-                data.execution_date = (string) reader[4];
-                data.status = (Status) reader[5];
-                data.priority = (Priority) reader[6];
-                tableDatas.Add(data);
+                TableData record = new TableData();
+                record.id = Convert.ToInt32(reader[0]);
+                record.name = reader.GetString(1);
+                record.description = reader.GetString(2);
+                record.creation_date = reader.GetString(3);
+                record.execution_date = reader.GetString(4);
+                record.status = (Status) Convert.ToInt32(reader[5]);
+                record.priority = (Priority) Convert.ToUInt32(reader[6]);
+                record.is_deleted = Convert.ToBoolean(reader[7]);
+                tableDatas.Add(record);
             }
+            reader.Close();
             return tableDatas;
         }
         

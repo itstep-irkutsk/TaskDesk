@@ -11,5 +11,13 @@ namespace DataBaseLib
         public string execution_date;
         public Status status;
         public Priority priority;
+        public bool is_deleted;
+
+        public TableData()
+        {
+            status = Status.NotTheWork;
+            priority = Priority.Low;
+            is_deleted = false;
+        }
     }
 }
