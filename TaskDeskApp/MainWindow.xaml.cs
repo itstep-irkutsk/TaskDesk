@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TaskDeskApp
 {
@@ -7,6 +8,14 @@ namespace TaskDeskApp
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+   
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+           MessageBox.Show("Работает");
+           Event2.Items.Add(new ListBoxItem().Content="Задача 2");
         }
     }
 }

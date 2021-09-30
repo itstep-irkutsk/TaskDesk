@@ -3,10 +3,157 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+       
         xmlns:local="clr-namespace:TaskDeskApp"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MaterialDesignWindow}">
+    <!--<Window.CommandBindings>
+        <CommandBinding Command="Copy" Executed="OnCopy"/>
+    </Window.CommandBindings>-->
+   <Window.Resources>
+       <Style TargetType="Button">
+           <Setter Property="Margin" Value="10"/>
+       </Style>
+   </Window.Resources>
+  
+    <Grid ShowGridLines="True">
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DataGridRow Grid.Row="0" Background="#673AB7"/>
+        <DataGridRow Grid.Row="1" Background="White"/>
+        <!--<TextBlock Text="Планировщик задач" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="White"/>-->
+        <materialDesign:ColorZone
+            Mode="PrimaryDark"
+            Padding="16">
+            <StackPanel
+                Orientation="Horizontal">
+                <ToggleButton
+                    Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Margin="16 0 0 0"
+                    Text="Наш планировщик задач" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock
+                        x:Name="Month_Block"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="16 0 0 0"
+                        Text="Отображаемый месяц 2021 год" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="WithBTN" Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Background="#673AB7">
+                <TextBlock Text="Основные функции" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="14" Foreground="Blue" FontWeight="Bold"/>
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="{Binding ElementName=WithBTN, Path = Width}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Content="Создать событие"
+                    Click="ButtonBase_OnClick"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="{Binding ElementName=WithBTN, Path = Width}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Content="Сделать Еще что-нибудь"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                <Button
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="{Binding ElementName=WithBTN, Path = Width}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton"
+                    Content="Удалить событие"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+            </StackPanel>
+            <Grid Grid.Column="1" x:Name="Calendar" ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+             
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Понедельник" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Вторник" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Среда" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="Четверг" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Пятница" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="5" Text="Суббота" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Grid.Column="6" Text="Воскресенье" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
+                <ListBox Grid.Row="1" Grid.Column="0" x:Name="Event1" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="1" x:Name="Event2" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="2" x:Name="Event3" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="3" x:Name="Event4" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="4" x:Name="Event5" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="5" x:Name="Event6" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="6" x:Name="Event7" >  </ListBox>
+                
+                <ListBox Grid.Row="2" Grid.Column="0" x:Name="Event8" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="1" x:Name="Event9" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="2" x:Name="Event10" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="3" x:Name="Event11" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="4" x:Name="Event12" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="5" x:Name="Event13" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="6" x:Name="Event14" >  </ListBox>
+                
+                <ListBox Grid.Row="3" Grid.Column="0" x:Name="Event15" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="1" x:Name="Event16" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="2" x:Name="Event17" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="3" x:Name="Event18" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="4" x:Name="Event19" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="5" x:Name="Event20" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="6" x:Name="Event21" >  </ListBox>
+                
+                <ListBox Grid.Row="4" Grid.Column="0" x:Name="Event22" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="1" x:Name="Event23" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="2" x:Name="Event24" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="3" x:Name="Event25" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="4" x:Name="Event26" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="5" x:Name="Event27" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="6" x:Name="Event28" >  </ListBox>
+                
+                <ListBox Grid.Row="5" Grid.Column="0" x:Name="Event29" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="1" x:Name="Event30" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="2" x:Name="Event31" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="3" x:Name="Event32" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="4" x:Name="Event33" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="5" x:Name="Event34" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="6" x:Name="Event35" >  </ListBox>
+                
+            </Grid>
+       </Grid>
+        
+        
     </Grid>
 </Window>
