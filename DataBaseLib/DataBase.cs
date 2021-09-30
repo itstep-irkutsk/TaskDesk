@@ -24,6 +24,7 @@ namespace DataBaseLib
             try
             {
                 connection.Open();
+                command = new SQLiteCommand(connection);
                 return true;
             }
             catch (SQLiteException ex)
@@ -68,7 +69,8 @@ namespace DataBaseLib
             TaskData record = null;
             if (Connect())
             {
-                command.CommandText = $"SELECT * from {namesBdAndTables.nameTableTask}WHERE name = ‘{data.name}’, description = '{data.description}' ,  creation_date = '{data.creation_date}', execution_date = '{data.execution_date}, status_id = '{data.status}, priority_id = '{data.priority}', is_deleted = '{data.is_deleted}'";
+                var sqlite_select_query = $"SELECT * from {namesBdAndTables.nameTableTask} WHERE name = '{data.name}' and description = '{data.description}' and  creation_date = '{data.creation_date}' and execution_date = '{data.execution_date}' and status_id = '{data.status}' and priority_id = '{data.priority}' and is_deleted = '{data.is_deleted}'";
+                command.CommandText = sqlite_select_query;
                 SQLiteDataReader reader = command.ExecuteReader();
                 reader.Read();
                 
@@ -82,7 +84,7 @@ namespace DataBaseLib
                     record.priority = Convert.ToInt32(reader[6]);
                     record.is_deleted = Convert.ToBoolean(reader[7]);
                 
-                reader.Close();
+                reader.Dispose();
                 command.Dispose();
                 Disconect();
             }
@@ -101,7 +103,7 @@ namespace DataBaseLib
 
         public async Task EditDataInTableAsync(TaskData data)
         {
-            var reqvest = $"UPDATE {namesBdAndTables.nameTableTask} SET name = ‘{data.name}’, description = '{data.description}' ,  creation_date = '{data.creation_date}', execution_date = '{data.execution_date}, status_id = '{data.status}, priority_id = '{data.priority}', is_deleted = '{data.is_deleted}' WHERE id = {data.id};"; //Todo Написать cтроку для изменения
+            var reqvest = $"UPDATE {namesBdAndTables.nameTableTask} SET name = '{data.name}', description = '{data.description}' ,  creation_date = '{data.creation_date}', execution_date = '{data.execution_date}', status_id = '{data.status}', priority_id = '{data.priority}', is_deleted = '{data.is_deleted}' WHERE id = '{data.id}'";
             await ReqvestAsync(reqvest);
         }
         
@@ -136,6 +138,11 @@ namespace DataBaseLib
             return tableDatas;
         }
         
+        public async Task DeleteDataInTableAsync(TaskData data)
+        {
+            var reqvest = $"UPDATE {namesBdAndTables.nameTableTask} SET is_deleted = True WHERE id = '{data.id}'";
+            await ReqvestAsync(reqvest);
+        }
 
         private bool Disconect()
         {

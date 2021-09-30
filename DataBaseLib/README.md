@@ -15,6 +15,7 @@
 - `AddDataInTableAsync(TaskData data)` асинхронный метод добавления задачи в Базу данных.
 - `EditDataInTableAsync(TaskData data)` асинхронный метод изменения задачи в базе данных.
 - `ReadDataInTableAsync()` асинхронный метод чтения задач из базы данных.
+- `DeleteDataInTableAsync(TaskData data)` асинхронный метод удаления задачи.
 
 ### Возвращаемые значения функций
 - `AddDataInTableAsync(TaskData data)` Возвращает полную Задачу с ID из базы данных добавленной Задачи.
