@@ -47,6 +47,14 @@
                     VerticalAlignment="Center"
                     Margin="16 0 0 0"
                     Text="Наш планировщик задач" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock
+                        x:Name="Month_Block"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Margin="16 0 0 0"
+                        Text="Отображаемый месяц 2021 год" FontSize="18" FontStyle="Normal" FontWeight="Bold"/>
+                </StackPanel>
             </StackPanel>
         </materialDesign:ColorZone>
         
@@ -103,6 +111,45 @@
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="Пятница" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="0" Grid.Column="5" Text="Суббота" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
                 <TextBlock Grid.Row="0" Grid.Column="6" Text="Воскресенье" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
+                <ListBox Grid.Row="1" Grid.Column="0" x:Name="Event1" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="1" x:Name="Event2" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="2" x:Name="Event3" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="3" x:Name="Event4" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="4" x:Name="Event5" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="5" x:Name="Event6" >  </ListBox>
+                <ListBox Grid.Row="1" Grid.Column="6" x:Name="Event7" >  </ListBox>
+                
+                <ListBox Grid.Row="2" Grid.Column="0" x:Name="Event8" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="1" x:Name="Event9" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="2" x:Name="Event10" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="3" x:Name="Event11" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="4" x:Name="Event12" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="5" x:Name="Event13" >  </ListBox>
+                <ListBox Grid.Row="2" Grid.Column="6" x:Name="Event14" >  </ListBox>
+                
+                <ListBox Grid.Row="3" Grid.Column="0" x:Name="Event15" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="1" x:Name="Event16" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="2" x:Name="Event17" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="3" x:Name="Event18" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="4" x:Name="Event19" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="5" x:Name="Event20" >  </ListBox>
+                <ListBox Grid.Row="3" Grid.Column="6" x:Name="Event21" >  </ListBox>
+                
+                <ListBox Grid.Row="4" Grid.Column="0" x:Name="Event22" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="1" x:Name="Event23" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="2" x:Name="Event24" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="3" x:Name="Event25" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="4" x:Name="Event26" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="5" x:Name="Event27" >  </ListBox>
+                <ListBox Grid.Row="4" Grid.Column="6" x:Name="Event28" >  </ListBox>
+                
+                <ListBox Grid.Row="5" Grid.Column="0" x:Name="Event29" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="1" x:Name="Event30" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="2" x:Name="Event31" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="3" x:Name="Event32" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="4" x:Name="Event33" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="5" x:Name="Event34" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="6" x:Name="Event35" >  </ListBox>
                 
             </Grid>
        </Grid>
