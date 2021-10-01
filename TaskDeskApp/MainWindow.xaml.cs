@@ -66,7 +66,11 @@ namespace TaskDeskApp
 
         private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
         {
-            RemoveSelectedEventFromCalendar();
+            if (MessageBox.Show("Вы уверены, что хотите удалить событие?","Удаление записи",MessageBoxButton.OKCancel,MessageBoxImage.Warning)==MessageBoxResult.OK)
+            {
+                RemoveSelectedEventFromCalendar();    
+            }
+            
         }
     }
 }
