@@ -34,12 +34,13 @@ namespace TaskDeskApp
             var listboxitem = new ListBoxItem().Content = "Событие 1";
             listBox.Items.Add(listboxitem);
 
-            RemoveChildElementFromGrid(row,column,gridname);
+            RemoveChildElementFromGrid(row, column, gridname);
             Grid.SetRow(listBox, row);
             Grid.SetColumn(listBox, column);
 
             gridname.Children.Add(listBox);
         }
+
         private void RemoveChildElementFromGrid(int row, int column, Grid gridname)
         {
             for (int i = 0; i < gridname.Children.Count; i++)
@@ -52,16 +53,20 @@ namespace TaskDeskApp
             }
         }
 
-        private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
+        private void RemoveSelectedEventFromCalendar()
         {
-            foreach (var obj  in Calendar.Children)
+            foreach (var obj in Calendar.Children)
             {
                 if (obj is ListBox)
                 {
                     (obj as ListBox).Items.Remove((obj as ListBox).SelectedItem);
                 }
-                
             }
+        }
+
+        private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
+        {
+            RemoveSelectedEventFromCalendar();
         }
     }
 }
