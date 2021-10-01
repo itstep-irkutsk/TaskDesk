@@ -111,7 +111,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="Пятница" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="0" Grid.Column="5" Text="Суббота" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
                 <TextBlock Grid.Row="0" Grid.Column="6" Text="Воскресенье" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
-                <ListBox Grid.Row="1" Grid.Column="0" x:Name="Event1" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <!--<ListBox Grid.Row="1" Grid.Column="0" x:Name="Event1" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
                 <ListBox Grid.Row="1" Grid.Column="1" x:Name="Event2" >  </ListBox>
                 <ListBox Grid.Row="1" Grid.Column="2" x:Name="Event3" >  </ListBox>
                 <ListBox Grid.Row="1" Grid.Column="3" x:Name="Event4" >  </ListBox>
@@ -149,7 +149,7 @@
                 <ListBox Grid.Row="5" Grid.Column="3" x:Name="Event32" >  </ListBox>
                 <ListBox Grid.Row="5" Grid.Column="4" x:Name="Event33" >  </ListBox>
                 <ListBox Grid.Row="5" Grid.Column="5" x:Name="Event34" >  </ListBox>
-                <ListBox Grid.Row="5" Grid.Column="6" x:Name="Event35" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="6" x:Name="Event35" >  </ListBox>-->
                 
             </Grid>
        </Grid>
