@@ -83,6 +83,7 @@
                     Width="{Binding ElementName=WithBTN, Path = Width}"
                     ToolTip="Resource name: MaterialDesignRaisedButton"
                     Content="Удалить событие"
+                    Click="ButtonDelete_OnClick"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             </StackPanel>
             <Grid Grid.Column="1" x:Name="Calendar" ShowGridLines="True">

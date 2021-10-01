@@ -40,7 +40,6 @@ namespace TaskDeskApp
 
             gridname.Children.Add(listBox);
         }
-
         private void RemoveChildElementFromGrid(int row, int column, Grid gridname)
         {
             for (int i = 0; i < gridname.Children.Count; i++)
@@ -50,6 +49,18 @@ namespace TaskDeskApp
                     gridname.Children.Remove(gridname.Children[i]);
                     break;
                 }
+            }
+        }
+
+        private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
+        {
+            foreach (var obj  in Calendar.Children)
+            {
+                if (obj is ListBox)
+                {
+                    (obj as ListBox).Items.Remove((obj as ListBox).SelectedItem);
+                }
+                
             }
         }
     }
