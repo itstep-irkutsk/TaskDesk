@@ -22,7 +22,31 @@ namespace DataBaseLib
             db = $"{nameDB}.sqlite";
             nameTable = "table_task";
         }
+        private bool Connect()
+        {
+            try
+            {
+                connection = new SQLiteConnection("Data Source=" + db + ";Version=3; FailIfMissing=False");
+                connection.Open();
+                return true;
+            }
+            catch (SQLiteException ex)
+            {
+                return false;
+            }
+        }
 
+        public void AddTask() { }
+        public void DeleteTask() { }
+        public void EditTask() { }
+        public void AddPriority() { }
+        public void DeletePriority() { }
+        public void EditPriority() { }
+        public void AddStatus() { }
+        public void DeleteStatus() { }
+        public void EditStatus() { }
+
+        /*
         public bool Connect()
         {
             try
@@ -36,6 +60,7 @@ namespace DataBaseLib
                 return false;
             }
         }
+        
 
         public async Task ReqvestAsync(string reqvest)
         {
@@ -104,5 +129,6 @@ namespace DataBaseLib
                 return false;
             }
         }
+        */
     }
 }

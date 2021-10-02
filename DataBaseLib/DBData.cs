@@ -2,7 +2,7 @@
 
 namespace DataBaseLib
 {
-    public class DBData
+    public class DBTasks
     {
         public int id;
         public string name;
@@ -13,17 +13,19 @@ namespace DataBaseLib
         public Priority priority;
         public bool is_deleted;
 
-        public TableData()
+        public DBTasks()
         {
-            status = Status.NotTheWork;
+            //status = Status.NotTheWork;
             priority = Priority.Low;
             is_deleted = false;
         }
+
+        //public List<DBData> Tasks = new();
+
+        //public List<String> Priority = new();
+
+        //public Lsit<String> Status = new();
     }
 
-    public List<DBData> Tasks = new();
 
-    public List<String> Priority = new();
-
-    public Lsit<String> Status = new();
 }
