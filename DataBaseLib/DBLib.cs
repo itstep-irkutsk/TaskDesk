@@ -15,13 +15,11 @@ namespace DataBaseLib
         {
             _connectionString = @"Data Source=..\..\..\..\TaskDeskDB\TaskDeskDB.db; Version=3;";
             _tasks = new();
-            LoadFromDB();
         }
         public DBLib(string DBName)
         {
             _connectionString = @"Data Source=..\..\..\..\TaskDeskDB\" + DBName + "; Version=3;";
             _tasks = new();
-            LoadFromDB();
         }
         public async void LoadFromDB()
         {
