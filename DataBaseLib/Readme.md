@@ -11,7 +11,9 @@
 	>
 	> содержит асинхронные методы для добавления, удаления, редактирования записей в таблице table_task и параллельно в переменную _tasks.
 	>> AddTask(DBTask newTask).
+
 	>> DeleteTask(int taskId).
+
 	>> EditTask(int taskId, DBTask newTask).
 - вспомогательные классы DBTask, DBPriority, DBStatus для работы с классом DBLib.
 
