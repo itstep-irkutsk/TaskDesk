@@ -15,10 +15,10 @@
 ### Поля DBLib
 `ObservableCollection<DBTask> _tasks` - коллекция для хранения всех записей из таблицы table_task, имеет тип ObservableCollection<DBTask> что позволяет отслеживать любые изменения в коллекции, с помощью подписи на событие CollectionChanged или использовать ее в качестве источника данных в XAML  
 ### Методы BDLib
-`LoadFromDB()` - загружает таблицу table_task из бд в переменную _tasks класса BDLib.  
-`Task<int> AddTask(DBTask newTask)` - добавляет задачу в бд и в коллекцию _tasks класса BDLib и возвращает id добавленной задачи.  
-`DeleteTask(int taskId)` - удаляет задачу с переданным id из бд и из коллекции _tasks.  
-`EditTask(int taskId, DBTask newTask)` - редактирует задачу с переданным id в бд и в коллекции _tasks.  
+`void LoadFromDB()` - загружает таблицу table_task из бд в переменную _tasks класса BDLib.  
+`Task<int> AddTask(DBTask)` - добавляет задачу в бд и в коллекцию _tasks класса BDLib и возвращает id добавленной задачи.  
+`void DeleteTask(int)` - удаляет задачу с переданным id из бд и из коллекции _tasks.  
+`void EditTask(int, DBTask)` - редактирует задачу с переданным id в бд и в коллекции _tasks.  
 ### Как с этим работать  
 Создать экземпляр DBLib:  
 `DBLib DB = new();`  
