@@ -7,13 +7,13 @@
 	- Загружает данные из таблицы table_task с помощью метода LoadFromDB() во внутреннюю переменную _tasks, которая имеет тип ObservableCollection<DBTask>.
 	- Можно подписаться на события коллекции или использовать ее как источник данных в UI.
 	- Содержит асинхронные методы для добавления, удаления, редактирования записей в таблице table_task и параллельно в переменную _tasks.
-	- LoadFromDB() - загружает таблицу table_task из бд.
+	- LoadFromDB() - загружает таблицу table_task из бд.  
 	- AddTask(DBTask newTask) - добавляет задачу.
 	- DeleteTask(int taskId) - удаляет задачу с переданным идентификатором.
 	- EditTask(int taskId, DBTask newTask) - редактирует задачу с переданным идентификатором.
 2. вспомогательные классы DBTask, DBPriority, DBStatus для работы с классом DBLib.
 ### Функции BDLib
-`LoadFromDB()` - загружает таблицу table_task из бд в переменную _tasks класса BDLib.
+`LoadFromDB()` - загружает таблицу table_task из бд в переменную _tasks класса BDLib.  
 `Task<int> AddTask(DBTask newTask)` - добавляет задачу в бд и в коллекцию _tasks класса BDLib и возвращает id добавленной задачи.  
 `DeleteTask(int taskId)` - удаляет задачу с переданным id из бд и из коллекции _tasks.  
 `EditTask(int taskId, DBTask newTask)` - редактирует задачу с переданным id в бд и в коллекции _tasks.  
