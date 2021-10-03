@@ -37,6 +37,7 @@
 `int TaskId = DB.AddTask(task).Result;`  
 Чтобы удалить задачу используем метод DeleteTask(int). Метод принимает id задачи, удаляет запись из переменной _tasks и устанавливает поле is_deleted = 1 в соответствующей записи в бд:  
 >нумерация записей в sqlite начинается с 1  
+
 `DB.DeleteTask(1);`  
 И чтобы отредактировать запись используем метод EditTask(int, DBTask), в качестве аргумента передается id редактируемой задачи и измененная задача. Так же как в случае с добавлением записи, подготавливаем задачу с помощью класса DBTask и передаем ее аргументом в EditTask(int, DBTask):  
 `DBTask task = new DBTask() { _id = 0, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 0 };`  
