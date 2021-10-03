@@ -1,30 +1,25 @@
-﻿using System.Net.NetworkInformation;
-
-namespace DataBaseLib
+﻿namespace DataBaseLib
 {
-    public class DBTasks
+    public class DBTask
     {
-        public int id;
-        public string name;
-        public string description;
-        public string creation_date;
-        public string execution_date;
-        public int status;
-        public Priority priority;
-        public bool is_deleted;
-
-        public DBTasks()
-        {
-            //status = Status.NotTheWork;
-            priority = Priority.Low;
-            is_deleted = false;
-        }
-
-        //public List<DBData> Tasks = new();
-
-        //public List<String> Priority = new();
-
-        //public Lsit<String> Status = new();
+        public int _id;
+        public string _name;
+        public string _description;
+        public string _creation_date;
+        public string _execution_date;
+        public int _status;
+        public int _priority;
+        public DBTask() {}
+    }
+    public class DBPriority
+    {
+        public int _id;
+        public string _priority;
+    }
+    public class DBStatus
+    {
+        public int _id;
+        public string _status;
     }
 
 
