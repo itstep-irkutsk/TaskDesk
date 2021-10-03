@@ -12,34 +12,33 @@
 	- EditTask(int taskId, DBTask newTask) - редактирует задачу с переданным идентификатором.
 2. вспомогательные классы DBTask, DBPriority, DBStatus для работы с классом DBLib.
 ### Функции BDLib
-`Task<int> AddTask(DBTask newTask)` - добавляет задачу в бд и в коллекцию _tasks класса BDLib и возвращает id добавленной задачи.
-`DeleteTask(int taskId)` - удаляет задачу с переданным id из бд и из коллекции _tasks.
-`EditTask(int taskId, DBTask newTask)` - редактирует задачу с переданным id в бд и в коллекции _tasks.
-### Как с этим работать
-Создать экземпляр DBLib:
-`DBLib DB = new();`
-По умолчанию бд создается по пути TaskDeskDB\TaskDeskDB.db
-Можно использовать конструктор с параметром чтобы указать желаемый путь базы данных.
-Для создания бд в корне каталога программы можно написать следующее:
-`DBLib DB = new(..\TestDB.db);`
-Внутри DBLib существует переменная _tasks, которая является коллекцией ObservableCollection<DBTask> и содержит копию записей из таблицы table_task.
-Чтобы вручную отслеживать изменения в коллекции мы можем подписаться на событие CollectionChanged:
-`DB._tasks.CollectionChanged += Some_Method;`
-Подробнее здесь: https://metanit.com/sharp/tutorial/4.13.php
-Либо можно указать переменную _tasks в качестве источника данных.
-Подробнее тут: https://metanit.com/sharp/wpf/14.2.php
-Далее нужно загрузить данные из бд с помощью метода LoadFromDB():
-`DB.LoadFromDB();`
-И если по указанному при создании экземпляра DBLib пути существует база данных, то записи из таблицы table_task загружаются в переменную _tasks.
-Теперь можно добавлять задачи, для этого используем вспомогательный класс DBTask:
-`DBTask task = new DBTask() { _id = 0, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 0 };`
-И добавляем его в базу данных методом AddTask(DBTask). Метод асинхронный и возвращает id добавленной записи, поэтому чтобы добавить запись и получить его id в качестве результата, пишем следующее:
-`int TaskId = DB.AddTask(task).Result;`
-Чтобы удалить задачу используем метод DeleteTask(int). Метод принимает id задачи, удаляет запись из переменной _tasks и устанавливает поле is_deleted = 1 в соответствующей записи в бд:
->нумерация записей в sqlite начинается с 1
-
-`DB.DeleteTask(1);`
-И чтобы отредактировать запись используем метод EditTask(int, DBTask), в качестве аргумента передается id редактируемой задачи и измененная задача. Так же как в случае с добавлением записи, подготавливаем задачу с помощью класса DBTask и передаем ее аргументом в EditTask(int, DBTask):
-`DBTask task = new DBTask() { _id = 0, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 0 };`
-`DB.EditTask(3, task);`
-> так как поле id в базе данных формируется автоматически, можно оставлять его пустым при формировании задачи.
+`Task<int> AddTask(DBTask newTask)` - добавляет задачу в бд и в коллекцию _tasks класса BDLib и возвращает id добавленной задачи.  
+`DeleteTask(int taskId)` - удаляет задачу с переданным id из бд и из коллекции _tasks.  
+`EditTask(int taskId, DBTask newTask)` - редактирует задачу с переданным id в бд и в коллекции _tasks.  
+### Как с этим работать  
+Создать экземпляр DBLib:  
+`DBLib DB = new();`  
+По умолчанию бд создается по пути TaskDeskDB\TaskDeskDB.db  
+Можно использовать конструктор с параметром чтобы указать желаемый путь базы данных.  
+Для создания бд в корне каталога программы можно написать следующее:  
+`DBLib DB = new(..\TestDB.db);`  
+Внутри DBLib существует переменная _tasks, которая является коллекцией ObservableCollection<DBTask> и содержит копию записей из таблицы table_task.  
+Чтобы вручную отслеживать изменения в коллекции мы можем подписаться на событие CollectionChanged:  
+`DB._tasks.CollectionChanged += Some_Method;`  
+Подробнее здесь: https://metanit.com/sharp/tutorial/4.13.php  
+Либо можно указать переменную _tasks в качестве источника данных.  
+Подробнее тут: https://metanit.com/sharp/wpf/14.2.php  
+Далее нужно загрузить данные из бд с помощью метода LoadFromDB():  
+`DB.LoadFromDB();`  
+И если по указанному при создании экземпляра DBLib пути существует база данных, то записи из таблицы table_task загружаются в переменную _tasks.  
+Теперь можно добавлять задачи, для этого используем вспомогательный класс DBTask:  
+`DBTask task = new DBTask() { _id = 0, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 0 };`  
+И добавляем его в базу данных методом AddTask(DBTask). Метод асинхронный и возвращает id добавленной записи, поэтому чтобы добавить запись и получить его id в качестве результата, пишем следующее:  
+`int TaskId = DB.AddTask(task).Result;`  
+Чтобы удалить задачу используем метод DeleteTask(int). Метод принимает id задачи, удаляет запись из переменной _tasks и устанавливает поле is_deleted = 1 в соответствующей записи в бд:  
+>нумерация записей в sqlite начинается с 1  
+`DB.DeleteTask(1);`  
+И чтобы отредактировать запись используем метод EditTask(int, DBTask), в качестве аргумента передается id редактируемой задачи и измененная задача. Так же как в случае с добавлением записи, подготавливаем задачу с помощью класса DBTask и передаем ее аргументом в EditTask(int, DBTask):  
+`DBTask task = new DBTask() { _id = 0, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 0 };`  
+`DB.EditTask(3, task);`  
+> так как поле id в базе данных формируется автоматически, можно оставлять его пустым при формировании задачи.  
