@@ -43,7 +43,7 @@
 Чтобы вручную отслеживать изменения в коллекции мы можем подписаться на событие CollectionChanged:  
 `DB._tasks.CollectionChanged += Some_Method;`  
 Подробнее здесь: https://metanit.com/sharp/tutorial/4.13.php  
-Либо можно указать переменную _tasks в качестве источника данных.  
+Либо можно указать переменную _tasks в качестве источника данных в XAML.  
 Подробнее тут: https://metanit.com/sharp/wpf/14.2.php  
 
 Далее нужно загрузить данные из бд с помощью метода LoadFromDB():  
