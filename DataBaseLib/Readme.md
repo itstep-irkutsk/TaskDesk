@@ -51,7 +51,7 @@
 И если по указанному при создании экземпляра DBLib пути существует база данных, то записи из таблицы table_task загружаются в переменную _tasks.  
 
 Теперь можно добавлять задачи, для этого используем вспомогательный класс DBTask:  
-`DBTask task = new DBTask() { _id = 0, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 0 };`  
+`DBTask task = new DBTask() { _id = 1, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 1 };`  
 И добавляем его в базу данных методом AddTask(DBTask). Метод асинхронный и возвращает id добавленной записи, поэтому чтобы добавить запись и получить его id в качестве результата, пишем следующее:  
 `int TaskId = DB.AddTask(task).Result;`  
 
@@ -60,6 +60,6 @@
 >нумерация записей в sqlite начинается с 1  
 
 И чтобы отредактировать запись используем метод EditTask(int, DBTask), в качестве аргумента передается id редактируемой задачи и измененная задача. Так же как в случае с добавлением записи, подготавливаем задачу с помощью класса DBTask и передаем ее аргументом в EditTask(int, DBTask):  
-`DBTask task = new DBTask() { _id = 0, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 0 };`  
+`DBTask task = new DBTask() { _id = 1, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 1 };`  
 `DB.EditTask(3, task);`  
 > так как поле id в базе данных формируется автоматически, можно оставлять его пустым при формировании задачи.  
