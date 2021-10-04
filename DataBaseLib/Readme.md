@@ -53,7 +53,7 @@
 Теперь можно добавлять задачи, для этого используем вспомогательный класс DBTask:  
 `DBTask task = new DBTask() { _id = 1, _name = "somename", _description = "somedescription", _creation_date = "12345", _execution_date = "12345", _priority = 1, _status = 1 };`  
 И добавляем его в базу данных методом AddTask(DBTask). Метод асинхронный и возвращает id добавленной записи, поэтому чтобы добавить запись и получить его id в качестве результата, пишем следующее:  
-`int TaskId = DB.AddTask(task).Result;`  
+`int taskId = DB.AddTask(task).Result;`  
 
 Чтобы удалить задачу используем метод DeleteTask(int). Метод принимает id задачи, удаляет запись из переменной _tasks и устанавливает поле is_deleted = 1 в соответствующей записи в бд:  
 `DB.DeleteTask(1);`  
