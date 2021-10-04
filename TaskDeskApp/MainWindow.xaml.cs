@@ -57,9 +57,9 @@ namespace TaskDeskApp
         {
             foreach (var obj in Calendar.Children)
             {
-                if (obj is ListBox)
+                if (obj is ListBox list)
                 {
-                    (obj as ListBox).Items.Remove((obj as ListBox).SelectedItem);
+                    list.Items.Remove(list.SelectedItem);
                 }
             }
         }
