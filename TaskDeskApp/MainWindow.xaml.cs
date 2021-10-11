@@ -27,10 +27,8 @@ namespace TaskDeskApp
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("Работает");
-            PushListViewIntoGrid(1, 1, Calendar);
-
-            //Event2.Items.Add(new ListBoxItem().Content="Задача 2");
+            CreateTask createTask = new CreateTask();
+            createTask.Show();
         }
 
         private void PushListViewIntoGrid(int row, int column, Grid gridname)
