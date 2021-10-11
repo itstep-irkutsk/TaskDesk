@@ -22,7 +22,7 @@ namespace TaskDeskApp
                 new() { Id = 2, EventName = "Событие 2", EventDetail = "" },
                 new() { Id = 3, EventName = "Событие 3", EventDetail = "" }
             };
-            PushListViewIntoGrid(2,2,Calendar, _collection);
+            PushListViewIntoGrid(2, 2, Calendar, _collection);
         }
 
 
@@ -32,7 +32,8 @@ namespace TaskDeskApp
             createTask.Show();
         }
 
-        private void PushListViewIntoGrid(int row, int column, Grid gridname, ObservableCollection<DataModel_temp> _OBScollection)
+        private void PushListViewIntoGrid(int row, int column, Grid gridname,
+            ObservableCollection<DataModel_temp> _OBScollection)
         {
             //var listboxitem = new ListBoxItem().Content = "Событие 1";
             //listView.Items.Add(listboxitem);
@@ -58,9 +59,9 @@ namespace TaskDeskApp
 
             var gridView = new GridView();
             gridView.Columns.Add(gridColumnID);
-            
+
             gridView.Columns.Add(gridColumnName);
-            
+
             ListView listView = new ListView
             {
                 View = gridView,
@@ -92,17 +93,14 @@ namespace TaskDeskApp
             {
                 if (obj is ListView list)
                 {
-                   try
+                    try
                     {
                         _collection.Remove((DataModel_temp)list.SelectedItem);
-                       // list.Items.Remove(list.SelectedItem);
                     }
                     catch (Exception e)
                     {
                         MessageBox.Show(e.Message);
-
                     }
-                   
                 }
             }
         }
