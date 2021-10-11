@@ -4,9 +4,65 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskDeskApp"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="Планировщик задач" Height="450" Width="800">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid x:Name="mainGrid" ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150">
+            </ColumnDefinition>
+            <ColumnDefinition Width="Auto">
+            </ColumnDefinition>
+            <ColumnDefinition>
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Width="Auto">
+            <Button x:Name="buttonAddTask" Content="Добавить задачу"/>
+            <Button x:Name="buttonDelTask" Content="Удалить задачу"/>
+            <Button x:Name="buttonEditTask" Content="Редактировать задачу"/>
+        </StackPanel>
+        <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+        <DockPanel Grid.Column="2">
+            <Grid DockPanel.Dock="Top" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="*">
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="buttonPrevMonth"  Grid.Column="0" Content="Предыдущий месяц" Click="buttonPrevMonth_Click"/>
+                <Button x:Name="buttonNextMonth" Grid.Column="1" Content="Следующий месяц" Click="buttonNextMonth_Click"/>
+            </Grid>
+            <ListView x:Name="listView1">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Понедельник"
+                                        DisplayMemberBinding="{Binding Path=Monday}">                            
+                        </GridViewColumn>
+                        <GridViewColumn Header="Вторник"
+                                        DisplayMemberBinding="{Binding Path=Tuesday}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="Среда"
+                                        DisplayMemberBinding="{Binding Path=Wednesday}">
+                        </GridViewColumn>
+                        <GridViewColumn Header="Четверг"
+                                        DisplayMemberBinding="{Binding Path=Thursday}">                            
+                        </GridViewColumn>
+                        <GridViewColumn Header="Пятница"
+                                        DisplayMemberBinding="{Binding Path=Friday}">                            
+                        </GridViewColumn>
+                        <GridViewColumn Header="Суббота"
+                                        DisplayMemberBinding="{Binding Path=Saturday}">                            
+                        </GridViewColumn>
+                        <GridViewColumn Header="Воскресенье"
+                                        DisplayMemberBinding="{Binding Path=Sunday}">                            
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
     </Grid>
 </Window>
