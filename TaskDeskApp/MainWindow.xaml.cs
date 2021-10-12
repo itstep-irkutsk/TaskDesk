@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,8 +30,25 @@ namespace TaskDeskApp
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            var temp = GetDayofWeek(2021, 10);
+            var temp2 = GetColumnInCalendarFirsDayOfMonth(2021, 10);
+            MessageBox.Show($"Первый день месяца {temp} // {temp2}");
             CreateTask createTask = new CreateTask();
             createTask.Show();
+        }
+
+        private int GetColumnInCalendarFirsDayOfMonth(int Year, int Month)
+        {
+            var numInWeek = GetDayofWeek(Year, Month);
+
+            return numInWeek - 1;
+
+        }
+
+        private int GetDayofWeek(int Year, int Month)
+        {
+            DateTime beginningOfMonth = new DateTime(Year, Month, 1);
+            return (int)beginningOfMonth.DayOfWeek;
         }
 
         private void PushListViewIntoGrid(int row, int column, Grid gridname,
