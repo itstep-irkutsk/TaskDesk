@@ -14,6 +14,8 @@ namespace TaskDeskApp
     public partial class MainWindow : Window
     {
         private readonly ObservableCollection<DataModel_temp> _collection;
+        private readonly ObservableCollection<ObservableCollection<DataModel_temp>> _collection2;
+
 
         public MainWindow()
         {
@@ -24,7 +26,16 @@ namespace TaskDeskApp
                 new() { Id = 2, EventName = "Событие 2", EventDetail = "" },
                 new() { Id = 3, EventName = "Событие 3", EventDetail = "" }
             };
-            PushListViewIntoGrid(2, 2, Calendar, _collection);
+            _collection2 = new ObservableCollection<ObservableCollection<DataModel_temp>>();
+            _collection2.Add(_collection);
+            _collection2.Add(_collection);
+            for (int i = 2; i < 30; i++)
+            {
+                _collection2.Add(new ObservableCollection<DataModel_temp>());
+            }
+            UserSelecedDate.SelectedDate = DateTime.Now;
+            //PushListViewIntoGrid(2, 2, Calendar, _collection);
+            CalendarReDraw(_collection2);
         }
 
 
@@ -37,10 +48,13 @@ namespace TaskDeskApp
             createTask.Show();
         }
 
-        public void CalendarReDraw(ObservableCollection<ObservableCollection<DataModel_temp>> eventsMonthCollection,
-            int Year, int Month)
+        public void CalendarReDraw(ObservableCollection<ObservableCollection<DataModel_temp>> eventsMonthCollection)
         {
-            var startColumn = GetColumnInCalendarFirsDayOfMonth(Year, Month);
+            DateTime selecedDate = new DateTime();
+            //selecedDate = DateTime.Now;
+            //var selectedDate = UserSelecedDate.SelectedDate.Value.Date.Year;
+           //TODO Обратить ОСОБОЕ внимание!!!
+            var startColumn = GetColumnInCalendarFirsDayOfMonth((int)UserSelecedDate.SelectedDate.Value.Date.Year, UserSelecedDate.SelectedDate.Value.Date.Month);
             var index = 0;
             for (int row = 1; row < 5; row++)
             {
@@ -48,11 +62,15 @@ namespace TaskDeskApp
                 {
                     if (row == 1 && column < startColumn)
                     {
-                        break;
+                     continue;
                     }
                     else
                     {
-                        PushListViewIntoGrid(row, column, Calendar, eventsMonthCollection[index]);
+                        if (!(eventsMonthCollection[index] == null))
+                        {
+                            PushListViewIntoGrid(row, column, Calendar, eventsMonthCollection[index]);
+                        }
+
                         index++;
                     }
                 }
@@ -72,7 +90,7 @@ namespace TaskDeskApp
 
         private int GetDayofWeek(int Year, int Month)
         {
-            DateTime beginningOfMonth = new DateTime(Year, Month, 3);
+            DateTime beginningOfMonth = new DateTime(Year, Month, 1);
             return (int)beginningOfMonth.DayOfWeek;
         }
 
