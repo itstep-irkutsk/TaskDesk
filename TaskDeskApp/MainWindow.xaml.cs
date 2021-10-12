@@ -37,17 +37,42 @@ namespace TaskDeskApp
             createTask.Show();
         }
 
+        public void CalendarReDraw(ObservableCollection<ObservableCollection<DataModel_temp>> eventsMonthCollection,
+            int Year, int Month)
+        {
+            var startColumn = GetColumnInCalendarFirsDayOfMonth(Year, Month);
+            var index = 0;
+            for (int row = 1; row < 5; row++)
+            {
+                for (int column = 0; column < 6; column++)
+                {
+                    if (row == 1 && column < startColumn)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        PushListViewIntoGrid(row, column, Calendar, eventsMonthCollection[index]);
+                        index++;
+                    }
+                }
+            }
+        }
+
         private int GetColumnInCalendarFirsDayOfMonth(int Year, int Month)
         {
             var numInWeek = GetDayofWeek(Year, Month);
-
-            return numInWeek - 1;
-
+            switch (numInWeek)
+            {
+                case int n when (n > 1 && n < 7): return numInWeek - 1;
+                case 0: return 6;
+                default: return -1;
+            }
         }
 
         private int GetDayofWeek(int Year, int Month)
         {
-            DateTime beginningOfMonth = new DateTime(Year, Month, 1);
+            DateTime beginningOfMonth = new DateTime(Year, Month, 3);
             return (int)beginningOfMonth.DayOfWeek;
         }
 
@@ -78,7 +103,6 @@ namespace TaskDeskApp
 
             var gridView = new GridView();
             gridView.Columns.Add(gridColumnID);
-
             gridView.Columns.Add(gridColumnName);
 
             ListView listView = new ListView
