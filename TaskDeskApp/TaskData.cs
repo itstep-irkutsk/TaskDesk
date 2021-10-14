@@ -1,6 +1,6 @@
 ﻿namespace TaskDeskApp
 {
-    public class DataModel_temp
+    public class TaskData
     {
         public int Id { get; set; }
         public string EventName { get; set; }

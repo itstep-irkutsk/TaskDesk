@@ -13,34 +13,36 @@ namespace TaskDeskApp
 {
     public partial class MainWindow : Window
     {
-        private readonly ObservableCollection<DataModel_temp> _collection;
-        private readonly ObservableCollection<DataModel_temp> _collection1;
+        /*private readonly ObservableCollection<TaskData> _collection;
+        private readonly ObservableCollection<TaskData> _collection1;*/
 
-        private readonly ObservableCollection<ObservableCollection<DataModel_temp>> _collection2;
+        private readonly ObservableCollection<ObservableCollection<TaskData>> _collection2;
 
 
         public MainWindow()
         {
             InitializeComponent();
-            _collection = new ObservableCollection<DataModel_temp>
+            /*
+            _collection = new ObservableCollection<TaskData>
             {
                 new() { Id = 1, EventName = "Событие 1", EventDetail = "" },
                 new() { Id = 2, EventName = "Событие 2", EventDetail = "" },
                 new() { Id = 3, EventName = "Событие 3", EventDetail = "" }
             };
-            _collection1 = new ObservableCollection<DataModel_temp>
+            _collection1 = new ObservableCollection<TaskData>
             {
                 new() { Id = 2, EventName = "Событие 11", EventDetail = "" },
                 new() { Id = 2, EventName = "Событие 21", EventDetail = "" },
                 new() { Id = 3, EventName = "Событие 31", EventDetail = "" }
             };
-            _collection2 = new ObservableCollection<ObservableCollection<DataModel_temp>>();
+            _collection2 = new ObservableCollection<ObservableCollection<TaskData>>();
             _collection2.Add(_collection);
             _collection2.Add(_collection1);
             for (int i = 2; i < 30; i++)
             {
-                _collection2.Add(new ObservableCollection<DataModel_temp>());
+                _collection2.Add(new ObservableCollection<TaskData>());
             }
+            */
 
             UserSelecedDate.SelectedDate = DateTime.Now;
             //PushListViewIntoGrid(2, 2, Calendar, _collection);
@@ -57,7 +59,7 @@ namespace TaskDeskApp
             createTask.Show();
         }
 
-        public void CalendarReDraw(ObservableCollection<ObservableCollection<DataModel_temp>> eventsMonthCollection)
+        public void CalendarReDraw(ObservableCollection<ObservableCollection<TaskData>> eventsMonthCollection)
         {
             DateTime selecedDate = new DateTime();
             //selecedDate = DateTime.Now;
@@ -105,7 +107,7 @@ namespace TaskDeskApp
         }
 
         private void PushListViewIntoGrid(int row, int column, Grid gridname,
-            ObservableCollection<DataModel_temp> _OBScollection)
+            ObservableCollection<TaskData> _OBScollection)
         {
             //var listboxitem = new ListBoxItem().Content = "Событие 1";
             //listView.Items.Add(listboxitem);
@@ -118,7 +120,7 @@ namespace TaskDeskApp
             gridname.Children.Add(listView);
         }
 
-        private ListView PushEventIntoListview(ObservableCollection<DataModel_temp> _OBScollection)
+        private ListView PushEventIntoListview(ObservableCollection<TaskData> _OBScollection)
         {
             var gridColumnID = new GridViewColumn
             {
@@ -168,7 +170,7 @@ namespace TaskDeskApp
                     {
                         for (int i = 0; i < _collection2.Count; i++)
                         {
-                            _collection2[i]?.Remove((DataModel_temp)list.SelectedItem);    
+                            _collection2[i]?.Remove((TaskData)list.SelectedItem);    
                         }
                         
                     }
