@@ -3,44 +3,81 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+       
         xmlns:local="clr-namespace:TaskDeskApp"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="CreateTask" Height="500" Width="900">
-    <Grid>
-        <Grid.ColumnDefinitions>
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MaterialDesignWindow}">
+    <!--<Window.CommandBindings>
+        <CommandBinding Command="Copy" Executed="OnCopy"/>
+    </Window.CommandBindings>-->
+    <Grid ShowGridLines="True">
 
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
         </Grid.RowDefinitions>
-        <TextBox Text="name" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
-        <TextBox Text="id" TextWrapping="Wrap" Grid.Column="1"/>
+        <DataGridRow Grid.Row="0" Background="#673AB7"/>
+        <DataGridRow Background="White" Grid.Row="1">
 
-        <TextBox Text="execution_date" TextWrapping="Wrap" Grid.Column="1" Grid.Row="3" Margin="0,30,0,0" Grid.RowSpan="2" Cursor="IBeam"/>
-        <TextBox TextWrapping="Wrap" Grid.Column="1" Grid.Row="4" Margin="0,30,0,0" Grid.RowSpan="2" Text="status"/>
-        <TextBox Text="priority" TextWrapping="Wrap" Grid.Column="1" Grid.Row="5" Margin="0,30,0,0" Grid.RowSpan="2"/>
-        <TextBox Text="is_deleted" TextWrapping="Wrap" Grid.Column="1" Grid.Row="6" Margin="0,30,0,0" Grid.RowSpan="2"/>
-        <TextBlock Text="id" TextWrapping="Wrap" Margin="0,2,0,0"/>
-        <TextBlock Text="name" TextWrapping="Wrap" Margin="0,0,0,2" Grid.Row="1"/>
-        <TextBlock Text="creation_date" TextWrapping="Wrap" Margin="0,1,0,1" Grid.Row="3"/>
-        <TextBlock Text="execution_date" TextWrapping="Wrap" Margin="0,29,0,3" Grid.RowSpan="2" Grid.Row="3"/>
-        <TextBlock Text="status" TextWrapping="Wrap" Margin="0,30,0,2" Grid.Row="4" Grid.RowSpan="2"/>
-        <TextBlock Text="priority" TextWrapping="Wrap" Margin="0,30,0,2" Grid.RowSpan="2" Grid.Row="5"/>
-        <TextBlock TextWrapping="Wrap" Margin="0,1,0,1" Grid.Row="7"><Run Text="is_deleted"/><LineBreak/><Run/></TextBlock>
-        <TextBlock Text="description" TextWrapping="Wrap" Margin="0,0,0,29" Grid.Row="2" Grid.RowSpan="2"/>
-        <TextBox Text="description" TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" Margin="0,0,0,4" Cursor="IBeam"/>
-        <TextBox Text="creation_date" TextWrapping="Wrap" Grid.Column="1" Grid.Row="3" Margin="0,1,0,2" Cursor="IBeam"/>
-        <Button Content="удалить" Grid.Column="1" HorizontalAlignment="Left" Margin="0,60,0,0" Grid.Row="7" VerticalAlignment="Top" Height="43" Width="133" Click="Button_Click" Cursor="Hand"/>
-        <Button Content="создать" Grid.Column="1" HorizontalAlignment="Left" Margin="517,61,0,0" Grid.Row="7" VerticalAlignment="Top" Height="43" Width="133" Click="Button_Click" Cursor="Hand"/>
+        </DataGridRow>
+        <materialDesign:ColorZone
+            Mode="PrimaryDark"
+            Padding="16" VerticalAlignment="Center" Height="58">
+            <StackPanel
+                Orientation="Horizontal">
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Margin="16 0 0 0"
+                    Text="Создай новое событие" FontSize="22" FontStyle="Normal" FontWeight="Bold"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <StackPanel Grid.Column="0" Orientation="Vertical" Background="white" Grid.Row="1">
+            <Grid Grid.Column="1" x:Name="CreateTask_grid" ShowGridLines="True" Height="375">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="Save" Grid.Column="1" Grid.Row="6" Content="Сохранить"></Button>
+                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white" Foreground="black"></Button>
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Название" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата создания" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Дата исполнения" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Статус" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Приоритет" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
+
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="Name"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="Description"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="Creation_date"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="Execution_date"></TextBox>
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="Status"></TextBox>
+                <TextBox Grid.Row="5" Grid.Column="1" x:Name="Priority"></TextBox>
+            </Grid>
+        </StackPanel>
 
     </Grid>
 </Window>
