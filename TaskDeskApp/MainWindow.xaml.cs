@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Windows.Data;
+using System.Windows.Controls;
 
 namespace TaskDeskApp
 {
     public partial class MainWindow : Window
     {
-        public Month Month { get; set; }
+        public Month Month1 { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,20 +38,31 @@ namespace TaskDeskApp
                                 new Week() { day1 = "понедельник", day2 = "вторник", day3 = "среда", day4 = "четверг", day5 = "пятница", day6 = "суббота", day7 = "воскресенье" },
                             }
                         };*/
-            Month = new();
-            listView1.ItemsSource = Month.Weeks;
+            Month1 = new();
+            dataGrid1.DataContext = Month1.Weeks;
+            //DataContext = Month.Weeks;
+            //listView1.ItemsSource = Month.Weeks;
+
             //listView1.
             //this.DataContext = Month;
         }
 
         private void buttonNextMonth_Click(object sender, RoutedEventArgs e)
         {
-            Month.NextMonth(1);
+            Month1.NextMonth(1);
         }
 
         private void buttonPrevMonth_Click(object sender, RoutedEventArgs e)
         {
-            Month.NextMonth(-1);
+            Month1.NextMonth(-1);
+        }
+
+        private void dataGrid1_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            dataGrid1.RowHeight = (dataGrid1.ActualHeight - dataGrid1.ColumnHeaderHeight - 2) / 6;
+            //MessageBox.Show(((double)dataGrid1.ColumnHeaderHeight).ToString());
+            //DataGrid tempDataGrid = (DataGrid)sender;
+            //tempDataGrid.RowHeight = tempDataGrid.Height +50;
         }
     }
     /*    public class Month
@@ -137,4 +152,17 @@ namespace TaskDeskApp
         public int Saturday { get; set; }
         public int Sunday { get; set; }
     }
+/*    public class WithPercentageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+
+            return ((DateTime)value).ToString("dd.MM.yyyy");
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return DependencyProperty.UnsetValue;
+        }
+    }*/
 }
