@@ -65,6 +65,12 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Background="#673AB7">
                 <TextBlock Text="Основные функции" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="14" Foreground="Blue" FontWeight="Bold"/>
+                <DatePicker
+                    x:Name="UserSelecedDate"
+                    Width="140"
+                    materialDesign:HintAssist.Hint="Pick Date"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                
                 <Button
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="{Binding ElementName=WithBTN, Path = Width}"
