@@ -19,6 +19,7 @@ namespace TaskDeskApp
         private readonly ObservableCollection<ObservableCollection<DataModel_temp>> _collection2;
 
 
+<<<<<<< Updated upstream
         public MainWindow()
         {
             InitializeComponent();
@@ -46,6 +47,9 @@ namespace TaskDeskApp
             //PushListViewIntoGrid(2, 2, Calendar, _collection);
             CalendarReDraw(_collection2);
         }
+=======
+       
+>>>>>>> Stashed changes
 
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
