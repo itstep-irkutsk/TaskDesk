@@ -54,6 +54,7 @@ namespace TaskDeskApp
             var temp2 = GetColumnInCalendarFirsDayOfMonth(2021, 10);
             MessageBox.Show($"Первый день месяца {temp} // {temp2}");*/
             CreateTask createTask = new CreateTask();
+            createTask.ResizeMode = ResizeMode.NoResize;
             createTask.ShowDialog();
         }
 
