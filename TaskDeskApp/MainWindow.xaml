@@ -65,6 +65,12 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Background="#673AB7">
                 <TextBlock Text="Основные функции" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="14" Foreground="Blue" FontWeight="Bold"/>
+                <DatePicker
+                    x:Name="UserSelecedDate"
+                    Width="140"
+                    materialDesign:HintAssist.Hint="Pick Date"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                
                 <Button
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Width="{Binding ElementName=WithBTN, Path = Width}"
@@ -83,6 +89,7 @@
                     Width="{Binding ElementName=WithBTN, Path = Width}"
                     ToolTip="Resource name: MaterialDesignRaisedButton"
                     Content="Удалить событие"
+                    Click="ButtonDelete_OnClick"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
             </StackPanel>
             <Grid Grid.Column="1" x:Name="Calendar" ShowGridLines="True">
@@ -111,7 +118,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="4" Text="Пятница" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="0" Grid.Column="5" Text="Суббота" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
                 <TextBlock Grid.Row="0" Grid.Column="6" Text="Воскресенье" HorizontalAlignment="Center" Foreground="Red" FontWeight="Bold"/>
-                <ListBox Grid.Row="1" Grid.Column="0" x:Name="Event1" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
+                <!--<ListBox Grid.Row="1" Grid.Column="0" x:Name="Event1" > <ListBoxItem>Запланированное задание1</ListBoxItem> </ListBox>
                 <ListBox Grid.Row="1" Grid.Column="1" x:Name="Event2" >  </ListBox>
                 <ListBox Grid.Row="1" Grid.Column="2" x:Name="Event3" >  </ListBox>
                 <ListBox Grid.Row="1" Grid.Column="3" x:Name="Event4" >  </ListBox>
@@ -149,7 +156,7 @@
                 <ListBox Grid.Row="5" Grid.Column="3" x:Name="Event32" >  </ListBox>
                 <ListBox Grid.Row="5" Grid.Column="4" x:Name="Event33" >  </ListBox>
                 <ListBox Grid.Row="5" Grid.Column="5" x:Name="Event34" >  </ListBox>
-                <ListBox Grid.Row="5" Grid.Column="6" x:Name="Event35" >  </ListBox>
+                <ListBox Grid.Row="5" Grid.Column="6" x:Name="Event35" >  </ListBox>-->
                 
             </Grid>
        </Grid>

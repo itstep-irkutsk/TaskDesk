@@ -7,28 +7,24 @@ namespace DataBaseLib
 {
     public class DataBase
     {
-        private string db;
-        private string nameTable;
-        static SQLiteConnection connection;
-        static SQLiteCommand command;
+        public NamesBDAndTables namesBdAndTables;
+        private SQLiteConnection connection;
+        private SQLiteCommand command;
 
         public DataBase()
         {
-            db = "SQLiteDB.sqlite";
-            nameTable = "table_task";
-        }
-        public DataBase(string nameDB)
-        {
-            db = $"{nameDB}.sqlite";
-            nameTable = "table_task";
+            namesBdAndTables = new NamesBDAndTables();
+            namesBdAndTables.DeserializeClass();
+            connection = new SQLiteConnection("Data Source=" + namesBdAndTables.nameBD + ";Version=3; FailIfMissing=False");
+            command = new SQLiteCommand(connection);
         }
 
-        public bool Connect()
+        private bool Connect()
         {
             try
             {
-                connection = new SQLiteConnection("Data Source=" + db + ";Version=3; FailIfMissing=False");
                 connection.Open();
+                command = new SQLiteCommand(connection);
                 return true;
             }
             catch (SQLiteException ex)
@@ -37,62 +33,118 @@ namespace DataBaseLib
             }
         }
 
-        public async Task ReqvestAsync(string reqvest)
+        public Dictionary<int, string> ReqvestDict(string nameTable)
         {
-            command = new SQLiteCommand(connection)
+            Dictionary<int, string> dict = new Dictionary<int, string>();
+            if (Connect())
             {
-                CommandText = reqvest
-            };
-            await command.ExecuteNonQueryAsync();
+                var sqlite_select_query = $"SELECT * from {nameTable}";
+                command.CommandText = sqlite_select_query;
+                SQLiteDataReader reader = command.ExecuteReader();
+            
+                while (reader.Read())
+                {
+                    var id = Convert.ToInt32(reader[0]);
+                    var name = reader.GetString(1);
+                    dict.Add(id, name);
+                }
+                command.Dispose();
+                Disconect();
+            }
+            return dict;
         }
 
-        public async Task CreateTableAsinc()
+        private async Task ReqvestAsync(string reqvest)
         {
-            var reqvest = $"create table {nameTable} (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,description TEXT,creation_date TEXT NOT NULL,execution_date TEXT NOT NULL,status_id INTEGER NOT NULL,priority_id INTEGER NOT NULL,is_deleted INTEGER NOT NULL);";
-            await ReqvestAsync(reqvest);
+            if (Connect())
+            {
+                command.CommandText = reqvest;
+                await command.ExecuteNonQueryAsync();
+                Disconect(); 
+            }
         }
 
-        public async Task AddDataInTableAsinc(TableData data)
+        private TaskData SearchByData(TaskData data)
+        {
+            TaskData record = null;
+            if (Connect())
+            {
+                var sqlite_select_query = $"SELECT * from {namesBdAndTables.nameTableTask} WHERE name = '{data.name}' and description = '{data.description}' and  creation_date = '{data.creation_date}' and execution_date = '{data.execution_date}' and status_id = '{data.status}' and priority_id = '{data.priority}' and is_deleted = '{data.is_deleted}'";
+                command.CommandText = sqlite_select_query;
+                SQLiteDataReader reader = command.ExecuteReader();
+                reader.Read();
+                
+                    record = new TaskData();
+                    record.id = Convert.ToInt32(reader[0]);
+                    record.name = reader.GetString(1);
+                    record.description = reader.GetString(2);
+                    record.creation_date = reader.GetString(3);
+                    record.execution_date = reader.GetString(4);
+                    record.status = Convert.ToInt32(reader[5]);
+                    record.priority = Convert.ToInt32(reader[6]);
+                    record.is_deleted = Convert.ToBoolean(reader[7]);
+                
+                reader.Dispose();
+                command.Dispose();
+                Disconect();
+            }
+
+            return record;
+        }
+
+        public async Task<TaskData> AddDataInTableAsync(TaskData data)
         {
             
-            var reqvest = $"INSERT INTO {nameTable} (name, description, creation_date, execution_date, status_id, priority_id , is_deleted) VALUES ('{data.name}' , '{data.description}' , '{data.creation_date}' , '{data.execution_date}' , '{data.status}' , '{data.priority}' , '{data.is_deleted}')";
+            var reqvest = $"INSERT INTO {namesBdAndTables.nameTableTask} (name, description, creation_date, execution_date, status_id, priority_id , is_deleted) VALUES ('{data.name}' , '{data.description}' , '{data.creation_date}' , '{data.execution_date}' , '{data.status}' , '{data.priority}' , '{data.is_deleted}')";
             await ReqvestAsync(reqvest);
+            var temp = SearchByData(data);
+            return temp;
         }
 
-        public async Task EditDataInTableAsinc(TableData data)
+        public async Task EditDataInTableAsync(TaskData data)
         {
-            var reqvest = $"UPDATE {nameTable} SET name = ‘{data.name}’, description = '{data.description}' ,  creation_date = '{data.creation_date}', execution_date = '{data.execution_date}, status_id = '{data.status}, priority_id = '{data.priority}', is_deleted = '{data.is_deleted}' WHERE id = {data.id};"; //Todo Написать cтроку для изменения
+            var reqvest = $"UPDATE {namesBdAndTables.nameTableTask} SET name = '{data.name}', description = '{data.description}' ,  creation_date = '{data.creation_date}', execution_date = '{data.execution_date}', status_id = '{data.status}', priority_id = '{data.priority}', is_deleted = '{data.is_deleted}' WHERE id = '{data.id}'";
             await ReqvestAsync(reqvest);
         }
         
-        public async Task<List<TableData>> ReadDataInTableAsinc()
+        public async Task<List<TaskData>> ReadDataInTableAsync()
         {
             
-            List<TableData> tableDatas = new List<TableData>();
+            List<TaskData> tableDatas = new List<TaskData>();
 
-            var sqlite_select_query = $"SELECT * from {nameTable}";
-            SQLiteCommand command = new SQLiteCommand(sqlite_select_query, connection);
-            SQLiteDataReader reader = command.ExecuteReader();
-            
-            while (reader.Read())
+            if (Connect())
             {
-                TableData record = new TableData();
-                record.id = Convert.ToInt32(reader[0]);
-                record.name = reader.GetString(1);
-                record.description = reader.GetString(2);
-                record.creation_date = reader.GetString(3);
-                record.execution_date = reader.GetString(4);
-                record.status = (Status) Convert.ToInt32(reader[5]);
-                record.priority = (Priority) Convert.ToUInt32(reader[6]);
-                record.is_deleted = Convert.ToBoolean(reader[7]);
-                tableDatas.Add(record);
+                var sqlite_select_query = $"SELECT * from {namesBdAndTables.nameTableTask}";
+                command.CommandText = sqlite_select_query;
+                SQLiteDataReader reader = command.ExecuteReader();
+            
+                while (reader.Read())
+                {
+                    TaskData record = new TaskData();
+                    record.id = Convert.ToInt32(reader[0]);
+                    record.name = reader.GetString(1);
+                    record.description = reader.GetString(2);
+                    record.creation_date = reader.GetString(3);
+                    record.execution_date = reader.GetString(4);
+                    record.status = Convert.ToInt32(reader[5]);
+                    record.priority = Convert.ToInt32(reader[6]);
+                    record.is_deleted = Convert.ToBoolean(reader[7]);
+                    tableDatas.Add(record);
+                }
+                reader.Close();
+                command.Dispose();
+                Disconect();
             }
-            reader.Close();
             return tableDatas;
         }
         
+        public async Task DeleteDataInTableAsync(TaskData data)
+        {
+            var reqvest = $"UPDATE {namesBdAndTables.nameTableTask} SET is_deleted = True WHERE id = '{data.id}'";
+            await ReqvestAsync(reqvest);
+        }
 
-        public bool Disconect()
+        private bool Disconect()
         {
             try
             {
