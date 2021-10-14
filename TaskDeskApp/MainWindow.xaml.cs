@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Xml.Linq;
+using DataBaseLib;
 
 namespace TaskDeskApp
 {

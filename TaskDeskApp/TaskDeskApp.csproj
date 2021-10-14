@@ -10,4 +10,8 @@
       <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\DataBaseLib\DataBaseLib.csproj" />
+    </ItemGroup>
+
 </Project>
