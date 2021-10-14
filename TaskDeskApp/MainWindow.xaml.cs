@@ -14,6 +14,8 @@ namespace TaskDeskApp
     public partial class MainWindow : Window
     {
         private readonly ObservableCollection<DataModel_temp> _collection;
+        private readonly ObservableCollection<DataModel_temp> _collection1;
+
         private readonly ObservableCollection<ObservableCollection<DataModel_temp>> _collection2;
 
 
@@ -26,13 +28,20 @@ namespace TaskDeskApp
                 new() { Id = 2, EventName = "Событие 2", EventDetail = "" },
                 new() { Id = 3, EventName = "Событие 3", EventDetail = "" }
             };
+            _collection1 = new ObservableCollection<DataModel_temp>
+            {
+                new() { Id = 2, EventName = "Событие 11", EventDetail = "" },
+                new() { Id = 2, EventName = "Событие 21", EventDetail = "" },
+                new() { Id = 3, EventName = "Событие 31", EventDetail = "" }
+            };
             _collection2 = new ObservableCollection<ObservableCollection<DataModel_temp>>();
             _collection2.Add(_collection);
-            _collection2.Add(_collection);
+            _collection2.Add(_collection1);
             for (int i = 2; i < 30; i++)
             {
                 _collection2.Add(new ObservableCollection<DataModel_temp>());
             }
+
             UserSelecedDate.SelectedDate = DateTime.Now;
             //PushListViewIntoGrid(2, 2, Calendar, _collection);
             CalendarReDraw(_collection2);
@@ -53,8 +62,9 @@ namespace TaskDeskApp
             DateTime selecedDate = new DateTime();
             //selecedDate = DateTime.Now;
             //var selectedDate = UserSelecedDate.SelectedDate.Value.Date.Year;
-           //TODO Обратить ОСОБОЕ внимание!!!
-            var startColumn = GetColumnInCalendarFirsDayOfMonth((int)UserSelecedDate.SelectedDate.Value.Date.Year, UserSelecedDate.SelectedDate.Value.Date.Month);
+            //TODO Обратить ОСОБОЕ внимание!!!
+            var startColumn = GetColumnInCalendarFirsDayOfMonth((int)UserSelecedDate.SelectedDate.Value.Date.Year,
+                UserSelecedDate.SelectedDate.Value.Date.Month);
             var index = 0;
             for (int row = 1; row < 5; row++)
             {
@@ -62,7 +72,7 @@ namespace TaskDeskApp
                 {
                     if (row == 1 && column < startColumn)
                     {
-                     continue;
+                        continue;
                     }
                     else
                     {
@@ -156,7 +166,11 @@ namespace TaskDeskApp
                 {
                     try
                     {
-                        _collection.Remove((DataModel_temp)list.SelectedItem);
+                        for (int i = 0; i < _collection2.Count; i++)
+                        {
+                            _collection2[i]?.Remove((DataModel_temp)list.SelectedItem);    
+                        }
+                        
                     }
                     catch (Exception e)
                     {
