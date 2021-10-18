@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Xml.Linq;
+using MaterialDesignThemes.Wpf;
 using DataBaseLib;
 
 namespace TaskDeskApp
@@ -52,11 +53,12 @@ namespace TaskDeskApp
         }
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var temp = GetDayofWeek(2021, 10);
+            /*var temp = GetDayofWeek(2021, 10);
             var temp2 = GetColumnInCalendarFirsDayOfMonth(2021, 10);
-            MessageBox.Show($"Первый день месяца {temp} // {temp2}");
+            MessageBox.Show($"Первый день месяца {temp} // {temp2}");*/
             CreateTask createTask = new CreateTask();
-            createTask.Show();
+            createTask.ResizeMode = ResizeMode.NoResize;
+            createTask.ShowDialog();
         }
 
         public void CalendarReDraw(ObservableCollection<ObservableCollection<TaskData>> eventsMonthCollection)
