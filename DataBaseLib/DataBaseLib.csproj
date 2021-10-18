@@ -6,6 +6,10 @@
 
     <ItemGroup>
       <PackageReference Include="System.Data.SQLite.Core" Version="1.0.115" />
+      
+        <None Update="Config.cfg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
