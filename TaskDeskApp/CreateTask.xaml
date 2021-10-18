@@ -44,25 +44,11 @@
             </StackPanel>
         </materialDesign:ColorZone>
         <StackPanel Grid.Column="0" Orientation="Vertical" Background="white" Grid.Row="1">
-            <Grid Grid.Column="1" x:Name="CreateTask_grid" ShowGridLines="True" Height="375">
+            <Grid Grid.Column="1" x:Name="CreateTask_grid" ShowGridLines="False" Height="375">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10*"/>
                     <ColumnDefinition Width="40*"/>
                 </Grid.ColumnDefinitions>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="150"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-
-                <Button x:Name="Save" Grid.Column="1" Grid.Row="6" Content="Сохранить"></Button>
-                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white" Foreground="black"></Button>
-                
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Название" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата создания" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
@@ -76,6 +62,35 @@
                 <TextBox Grid.Row="3" Grid.Column="1" x:Name="Execution_date"></TextBox>
                 <TextBox Grid.Row="4" Grid.Column="1" x:Name="Status"></TextBox>
                 <TextBox Grid.Row="5" Grid.Column="1" x:Name="Priority"></TextBox>
+
+                <Button x:Name="Save" Grid.Column="1" Grid.Row="6" Content="Сохранить"></Button>
+                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white" Foreground="black"></Button>
+                
+                <Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="0" Grid.Row="3" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="0" Grid.Row="4" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="0" Grid.Row="5" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="0" Grid.Row="6" BorderBrush="Black" BorderThickness="1"></Border>
+                
+                <Border Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="1" Grid.Row="4" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="1" Grid.Row="5" BorderBrush="Black" BorderThickness="1"></Border>
+                <Border Grid.Column="1" Grid.Row="6" BorderBrush="Black" BorderThickness="1"></Border>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
             </Grid>
         </StackPanel>
 
