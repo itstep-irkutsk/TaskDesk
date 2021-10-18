@@ -15,8 +15,8 @@ namespace TaskDeskApp
 {
     public partial class MainWindow : Window
     {
-        /*private readonly ObservableCollection<TaskData> _collection;
-        private readonly ObservableCollection<TaskData> _collection1;*/
+        private readonly ObservableCollection<TaskData> _collection;
+        private readonly ObservableCollection<TaskData> _collection1;
 
         private readonly ObservableCollection<ObservableCollection<TaskData>> _collection2;
 
@@ -25,18 +25,18 @@ namespace TaskDeskApp
         public MainWindow()
         {
             InitializeComponent();
-            /*
+           
             _collection = new ObservableCollection<TaskData>
             {
-                new() { Id = 1, EventName = "Событие 1", EventDetail = "" },
-                new() { Id = 2, EventName = "Событие 2", EventDetail = "" },
-                new() { Id = 3, EventName = "Событие 3", EventDetail = "" }
+                new() { id = 1, name = "Событие 1", description = "" },
+                new() { id = 2, name = "Событие 2", description = "" },
+                new() { id = 3, name = "Событие 3", description = "" }
             };
             _collection1 = new ObservableCollection<TaskData>
             {
-                new() { Id = 2, EventName = "Событие 11", EventDetail = "" },
-                new() { Id = 2, EventName = "Событие 21", EventDetail = "" },
-                new() { Id = 3, EventName = "Событие 31", EventDetail = "" }
+                new() { id = 2, name = "Событие 11", description = "" },
+                new() { id = 2, name = "Событие 21", description = "" },
+                new() { id = 3, name = "Событие 31", description = "" }
             };
             _collection2 = new ObservableCollection<ObservableCollection<TaskData>>();
             _collection2.Add(_collection);
@@ -45,10 +45,10 @@ namespace TaskDeskApp
             {
                 _collection2.Add(new ObservableCollection<TaskData>());
             }
-            */
+            
 
             UserSelecedDate.SelectedDate = DateTime.Now;
-            //PushListViewIntoGrid(2, 2, Calendar, _collection);
+            PushListViewIntoGrid(2, 2, Calendar, _collection);
             CalendarReDraw(_collection2);
         }
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -64,8 +64,8 @@ namespace TaskDeskApp
         public void CalendarReDraw(ObservableCollection<ObservableCollection<TaskData>> eventsMonthCollection)
         {
             DateTime selecedDate = new DateTime();
-            //selecedDate = DateTime.Now;
-            //var selectedDate = UserSelecedDate.SelectedDate.Value.Date.Year;
+            selecedDate = DateTime.Now;
+            var selectedDate = UserSelecedDate.SelectedDate.Value.Date.Year;
             //TODO Обратить ОСОБОЕ внимание!!!
             var startColumn = GetColumnInCalendarFirsDayOfMonth((int)UserSelecedDate.SelectedDate.Value.Date.Year,
                 UserSelecedDate.SelectedDate.Value.Date.Month);
