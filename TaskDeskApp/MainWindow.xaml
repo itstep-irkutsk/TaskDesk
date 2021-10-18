@@ -16,7 +16,7 @@
         xmlns:local="clr-namespace:TaskDeskApp"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Планировщик задач" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Style="{StaticResource MaterialDesignWindow}">
     <!--<Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy"/>
