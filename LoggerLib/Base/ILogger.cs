@@ -9,6 +9,6 @@ namespace LoggerLib
 {
     public interface ILogger
     {
-        public bool MakeLog(string taskInfo);
+        public void MakeLog(string taskInfo);
     }
 }
