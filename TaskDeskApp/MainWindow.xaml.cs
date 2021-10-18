@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Effects;
-using System.Xml.Linq;
-using MaterialDesignThemes.Wpf;
 using DataBaseLib;
 
 namespace TaskDeskApp
