@@ -24,6 +24,7 @@ namespace TaskDeskApp
         public MainWindow()
         {
             InitializeComponent();
+            
             /*
             _collection = new ObservableCollection<TaskData>
             {
@@ -104,7 +105,7 @@ namespace TaskDeskApp
         {
             DateTime beginningOfMonth = new DateTime(Year, Month, 1);
             return (int)beginningOfMonth.DayOfWeek;
-        }
+        } // !!! Возврат коллекцию Obscol на месяц Всех задач  
 
         private void PushListViewIntoGrid(int row, int column, Grid gridname,
             ObservableCollection<TaskData> _OBScollection)

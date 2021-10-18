@@ -135,7 +135,8 @@ namespace DataBaseLib
                 command.Dispose();
                 Disconect();
             }
-            return tableDatas;
+            return tableDatas; // Тип List (Получаем все задачи)
+            // Разбор всех задач по дате завершения
         }
         
         public async Task DeleteDataInTableAsync(TaskData data)
