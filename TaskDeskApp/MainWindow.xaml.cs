@@ -44,9 +44,11 @@ namespace TaskDeskApp
             }*/
             
             var data = _dataBase.ReadDataInTableAsync();
-            _obsCollection = CompletionObservableCollection(data.Result, 2021, 10);
+            
             UserSelecedDate.SelectedDate = DateTime.Now;
             PushListViewIntoGrid(2, 2, Calendar, _collection);
+            _obsCollection = CompletionObservableCollection(data.Result, UserSelecedDate.SelectedDate.Value.Date.Year,
+                UserSelecedDate.SelectedDate.Value.Date.Month);
             CalendarReDraw(_obsCollection);
         }
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
