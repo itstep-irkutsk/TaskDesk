@@ -16,17 +16,18 @@
         xmlns:local="clr-namespace:TaskDeskApp"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="Создать событие" Height="470" MaxHeight="{Binding ElementName=MainGRD, Path=Height}" MaxWidth="{Binding ElementName=MainGRD, Path=Width}" WindowStartupLocation="CenterScreen"
+        Title="Создать событие" Height="470" Width="705" WindowStartupLocation="CenterScreen"
         Style="{StaticResource MaterialDesignWindow}">
+    <!-- Пример биндинга Title="Создать событие" Height="{Binding ElementName=MainGRD, Path=Height}" Width="{Binding ElementName=MainGRD, Path=Width}" WindowStartupLocation="CenterScreen"-->
     <!--<Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy"/>
     </Window.CommandBindings>-->
-    <Grid ShowGridLines="True" x:Name="MainGRD">
+    <Grid ShowGridLines="True" x:Name="MainGRD" Height="470" Width="700">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition Height="0*"/>
+            <!--<RowDefinition Height="0*"/>-->
         </Grid.RowDefinitions>
         <DataGridRow Grid.Row="0" Background="#673AB7"/>
         <DataGridRow Background="White" Grid.Row="1">
@@ -43,11 +44,11 @@
                     Text="Новое событие" FontSize="22" FontStyle="Normal" FontWeight="Bold"/>
             </StackPanel>
         </materialDesign:ColorZone>
-        <StackPanel Grid.Column="0" Orientation="Vertical" Background="white" Grid.Row="1">
-            <Grid Grid.Column="1" x:Name="CreateTask_grid" ShowGridLines="False">
+       
+            <Grid Grid.Column="0" Grid.Row="1" x:Name="CreateTask_grid" ShowGridLines="False">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
@@ -66,12 +67,12 @@
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Статус" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Приоритет" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
 
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="Name" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="Name" VerticalAlignment="Center" Margin="0,0,5,0"/>
                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="Description"
+                         Margin="0,0,5,0"
                          TextWrapping="Wrap"
                          VerticalAlignment="Stretch"
                          HorizontalAlignment="Stretch"
-                         MinWidth="280"
                          AcceptsReturn="True"
                          VerticalScrollBarVisibility="Auto"
                          SpellCheck.IsEnabled="True"
@@ -79,33 +80,16 @@
                          Height="80"
                          Text="" />
               
-                <TextBox Grid.Row="2" Grid.Column="1" x:Name="Creation_date" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="3" Grid.Column="1" x:Name="Execution_date" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="4" Grid.Column="1" x:Name="Status" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="5" Grid.Column="1" x:Name="Priority" VerticalAlignment="Center"/>
-
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="Creation_date" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="Execution_date" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="Status" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                <TextBox Grid.Row="5" Grid.Column="1" x:Name="Priority" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                
+                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white"
+                        Foreground="black" Margin="5" Click="Delete_OnClick" />
                 <Button x:Name="Save" Grid.Column="1" Grid.Row="6" Content="Сохранить" Margin="5" Click="Save_OnClick"/>
-                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white" Foreground="black" Margin="5" Click="Delete_OnClick"/>
                 
-                <!--<Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="0" Grid.Row="3" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="0" Grid.Row="4" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="0" Grid.Row="5" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="0" Grid.Row="6" BorderBrush="Black" BorderThickness="1"></Border>
-                
-                <Border Grid.Column="1" Grid.Row="0" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="1" Grid.Row="3" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="1" Grid.Row="4" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="1" Grid.Row="5" BorderBrush="Black" BorderThickness="1"></Border>
-                <Border Grid.Column="1" Grid.Row="6" BorderBrush="Black" BorderThickness="1"></Border>-->
-
-               
-            </Grid>
-        </StackPanel>
-
+           </Grid>
+      
     </Grid>
 </Window>
