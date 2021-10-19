@@ -16,12 +16,12 @@
         xmlns:local="clr-namespace:TaskDeskApp"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="Создать событие" Height="470" Width="800" WindowStartupLocation="CenterScreen"
+        Title="Создать событие" Height="470" MaxHeight="{Binding ElementName=MainGRD, Path=Height}" MaxWidth="{Binding ElementName=MainGRD, Path=Width}" WindowStartupLocation="CenterScreen"
         Style="{StaticResource MaterialDesignWindow}">
     <!--<Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy"/>
     </Window.CommandBindings>-->
-    <Grid ShowGridLines="False" x:Name="MainGRD">
+    <Grid ShowGridLines="True" x:Name="MainGRD">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -40,15 +40,25 @@
                 <TextBlock
                     VerticalAlignment="Center"
                     Margin="16 0 0 0"
-                    Text="Создай новое событие" FontSize="22" FontStyle="Normal" FontWeight="Bold"/>
+                    Text="Новое событие" FontSize="22" FontStyle="Normal" FontWeight="Bold"/>
             </StackPanel>
         </materialDesign:ColorZone>
         <StackPanel Grid.Column="0" Orientation="Vertical" Background="white" Grid.Row="1">
-            <Grid Grid.Column="1" x:Name="CreateTask_grid" ShowGridLines="False" Height="375">
+            <Grid Grid.Column="1" x:Name="CreateTask_grid" ShowGridLines="False">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10*"/>
-                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Название" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата создания" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
@@ -57,7 +67,6 @@
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Приоритет" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1" x:Name="Name" VerticalAlignment="Center"/>
-                
                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="Description"
                          TextWrapping="Wrap"
                          VerticalAlignment="Stretch"
@@ -75,8 +84,8 @@
                 <TextBox Grid.Row="4" Grid.Column="1" x:Name="Status" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="5" Grid.Column="1" x:Name="Priority" VerticalAlignment="Center"/>
 
-                <Button x:Name="Save" Grid.Column="1" Grid.Row="6" Content="Сохранить"></Button>
-                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white" Foreground="black"></Button>
+                <Button x:Name="Save" Grid.Column="1" Grid.Row="6" Content="Сохранить" Margin="5" Click="Save_OnClick"/>
+                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white" Foreground="black" Margin="5" Click="Delete_OnClick"/>
                 
                 <!--<Border Grid.Column="0" Grid.Row="0" BorderBrush="Black" BorderThickness="1"></Border>
                 <Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1"></Border>
@@ -94,15 +103,7 @@
                 <Border Grid.Column="1" Grid.Row="5" BorderBrush="Black" BorderThickness="1"></Border>
                 <Border Grid.Column="1" Grid.Row="6" BorderBrush="Black" BorderThickness="1"></Border>-->
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="150"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
+               
             </Grid>
         </StackPanel>
 

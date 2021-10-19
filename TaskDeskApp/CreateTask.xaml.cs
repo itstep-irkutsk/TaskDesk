@@ -23,5 +23,15 @@ namespace TaskDeskApp
         {
             InitializeComponent();
         }
+
+        private void Delete_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+        }
+
+        private void Save_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
     }
 }
