@@ -7,14 +7,14 @@ namespace DataBaseLib
         static public Dictionary<int, string>statusDic;
         static public Dictionary<int, string>priorityDic;
         
-        public int id {get; set;}
-        public string name {get; set;}
-        public string description {get; set;}
-        public string creation_date {get; set;}
-        public string execution_date {get; set;}
-        public int status {get; set;}
-        public int priority {get; set;}
-        public bool is_deleted {get; set;}
+        public int Id {get; set;}
+        public string Name {get; set;}
+        public string Description {get; set;}
+        public string CreationDate {get; set;}
+        public string ExecutionDate {get; set;}
+        public int Status {get; set;}
+        public int Priority {get; set;}
+        public bool IsDeleted {get; set;}
 
         public TaskData() 
         {
