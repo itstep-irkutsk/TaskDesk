@@ -36,7 +36,13 @@ namespace TaskDeskApp
             MessageBox.Show($"Первый день месяца {temp} // {temp2}");*/
             CreateTask createTask = new CreateTask();
             createTask.ResizeMode = ResizeMode.NoResize;
-            createTask.ShowDialog();
+            if (createTask.ShowDialog().Value)
+            {
+                var taskdata = new TaskData();
+                taskdata.Name = createTask.Name.Text;
+                MessageBox.Show(createTask.Name.Text);
+                    _dataBase.AddDataInTableAsync(taskdata);
+            }
         }
 
         public void CalendarReDraw(ObservableCollection<ObservableCollection<TaskData>> eventsMonthCollection)
@@ -151,6 +157,7 @@ namespace TaskDeskApp
                         for (int i = 0; i < _obsCollection.Count; i++)
                         {
                             _obsCollection[i]?.Remove((TaskData)list.SelectedItem);
+                            _dataBase.DeleteDataInTableAsync((TaskData)list.SelectedItem);
                         }
                     }
                     catch (Exception e)
@@ -175,7 +182,7 @@ namespace TaskDeskApp
             foreach (var task in data)
             {
                 var dateTime = DateTime.Parse(task.ExecutionDate, cultureInfo);
-                if (dateTime.Year == year && dateTime.Month == month)
+                if (dateTime.Year == year && dateTime.Month == month && task.IsDeleted == false)
                 {
                     endData[dateTime.Day].Add(task);
                 }

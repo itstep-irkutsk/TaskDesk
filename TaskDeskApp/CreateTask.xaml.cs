@@ -22,6 +22,7 @@ namespace TaskDeskApp
         public CreateTask()
         {
             InitializeComponent();
+            Execution_date.SelectedDate = DateTime.Now;
         }
 
         private void Delete_OnClick(object sender, RoutedEventArgs e)

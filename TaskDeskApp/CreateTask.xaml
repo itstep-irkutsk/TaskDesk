@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        
+
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -12,7 +12,7 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-       
+
         xmlns:local="clr-namespace:TaskDeskApp"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
@@ -22,17 +22,15 @@
     <!--<Window.CommandBindings>
         <CommandBinding Command="Copy" Executed="OnCopy"/>
     </Window.CommandBindings>-->
-    <Grid ShowGridLines="True" x:Name="MainGRD" Height="470" Width="700">
+    <Grid ShowGridLines="False" x:Name="MainGRD" Height="470" Width="700">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
             <!--<RowDefinition Height="0*"/>-->
         </Grid.RowDefinitions>
-        <DataGridRow Grid.Row="0" Background="#673AB7"/>
-        <DataGridRow Background="White" Grid.Row="1">
-
-        </DataGridRow>
+        <DataGridRow Grid.Row="0" Background="#673AB7" />
+        <DataGridRow Background="White" Grid.Row="1" />
         <materialDesign:ColorZone
             Mode="PrimaryDark"
             Padding="16" VerticalAlignment="Center" Height="58">
@@ -41,55 +39,86 @@
                 <TextBlock
                     VerticalAlignment="Center"
                     Margin="16 0 0 0"
-                    Text="Новое событие" FontSize="22" FontStyle="Normal" FontWeight="Bold"/>
+                    Text="Новое событие" FontSize="22" FontStyle="Normal" FontWeight="Bold" />
             </StackPanel>
         </materialDesign:ColorZone>
-       
-            <Grid Grid.Column="0" Grid.Row="1" x:Name="CreateTask_grid" ShowGridLines="False">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="150"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="50"/>
-                </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Название" VerticalAlignment="Center"  HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата создания" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Дата исполнения" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Статус" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Приоритет" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
 
-                <TextBox Grid.Row="0" Grid.Column="1" x:Name="Name" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="Description"
-                         Margin="0,0,5,0"
-                         TextWrapping="Wrap"
-                         VerticalAlignment="Stretch"
-                         HorizontalAlignment="Stretch"
-                         AcceptsReturn="True"
-                         VerticalScrollBarVisibility="Auto"
-                         SpellCheck.IsEnabled="True"
-                         materialDesign:HintAssist.Hint="Многострочное поле ввода"
-                         Height="80"
-                         Text="" />
-              
-                <TextBox Grid.Row="2" Grid.Column="1" x:Name="Creation_date" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Grid.Row="3" Grid.Column="1" x:Name="Execution_date" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Grid.Row="4" Grid.Column="1" x:Name="Status" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                <TextBox Grid.Row="5" Grid.Column="1" x:Name="Priority" VerticalAlignment="Center" Margin="0,0,5,0"/>
-                
-                <Button x:Name="Delete" Grid.Column="0" Grid.Row="6" Content="Отмена" Background="white"
-                        Foreground="black" Margin="5" Click="Delete_OnClick" />
-                <Button x:Name="Save" Grid.Column="1" Grid.Row="6" Content="Сохранить" Margin="5" Click="Save_OnClick"/>
-                
-           </Grid>
-      
+        <Grid Grid.Column="0" Grid.Row="1" x:Name="CreateTask_grid" ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="50" />
+
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Название" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold" />
+            <!--<TextBlock Grid.Row="2" Grid.Column="0" Text="Дата создания" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>-->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата исполнения" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold" />
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Статус" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold" />
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Приоритет" VerticalAlignment="Center"
+                       HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold" />
+
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="Name" VerticalAlignment="Center" Margin="0,0,5,0" />
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="Description"
+                     Margin="0,0,5,0"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
+                     SpellCheck.IsEnabled="True"
+                     materialDesign:HintAssist.Hint="Многострочное поле ввода"
+                     Height="80"
+                     Text="" />
+
+            <DatePicker Grid.Row="2" Grid.Column="1"
+                        x:Name="Execution_date"
+                        Width="400"
+                        VerticalAlignment="Center"
+                        materialDesign:HintAssist.Hint="Pick Date"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+
+           
+            <ListBox Grid.Row="3" Grid.Column="1" Margin="0,0,5,0"
+                     Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}"
+                     x:Name="Status">
+                <ListBoxItem
+                    Content="Важно" />
+                <ListBoxItem
+                    IsSelected="True"
+                    Content="Обычный приоритет" />
+                <ListBoxItem
+                    Content="Неважно" />
+             </ListBox>
+       
+            <ListBox Grid.Row="4" Grid.Column="1" x:Name="Priority" Margin="0,0,5,0"
+                     Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}"
+                    >
+                <ListBoxItem
+                    Content="Высокий" />
+                <ListBoxItem
+                    IsSelected="True"
+                    Content="Обычный" />
+                <ListBoxItem
+                    Content="Низкий" />
+            </ListBox>
+            <Button x:Name="Delete" Grid.Column="0" Grid.Row="5" Content="Отмена" Background="white"
+                    Foreground="black" Margin="5" Click="Delete_OnClick" />
+            <Button x:Name="Save" Grid.Column="1" Grid.Row="5" Content="Сохранить" Margin="5" Click="Save_OnClick" />
+
+        </Grid>
+
     </Grid>
 </Window>
