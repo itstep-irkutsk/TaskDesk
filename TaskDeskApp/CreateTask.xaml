@@ -94,25 +94,25 @@
             <ListBox Grid.Row="3" Grid.Column="1" Margin="0,0,5,0"
                      Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}"
                      x:Name="Status">
-                <ListBoxItem
+                <!--<ListBoxItem
                     Content="Важно" />
                 <ListBoxItem
                     IsSelected="True"
                     Content="Обычный приоритет" />
                 <ListBoxItem
-                    Content="Неважно" />
+                    Content="Неважно" />-->
              </ListBox>
        
             <ListBox Grid.Row="4" Grid.Column="1" x:Name="Priority" Margin="0,0,5,0"
                      Style="{StaticResource MaterialDesignChoiceChipPrimaryListBox}"
                     >
-                <ListBoxItem
+                <!--<ListBoxItem
                     Content="Высокий" />
                 <ListBoxItem
                     IsSelected="True"
                     Content="Обычный" />
                 <ListBoxItem
-                    Content="Низкий" />
+                    Content="Низкий" />-->
             </ListBox>
             <Button x:Name="Delete" Grid.Column="0" Grid.Row="5" Content="Отмена" Background="white"
                     Foreground="black" Margin="5" Click="Delete_OnClick" />

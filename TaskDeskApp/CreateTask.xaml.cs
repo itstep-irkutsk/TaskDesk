@@ -24,8 +24,16 @@ namespace TaskDeskApp
         {
             InitializeComponent();
             Execution_date.SelectedDate = DateTime.Now;
-
-           //Status.Items.Add((TaskData.statusDic.ToList()));
+            
+           foreach (var status in TaskData.statusDic)
+           {
+               Status.Items.Add(status.Value);
+           }
+           foreach (var priority in TaskData.priorityDic)
+           {
+               Priority.Items.Add(priority.Value);
+           }
+           
         }
 
         private void Delete_OnClick(object sender, RoutedEventArgs e)
