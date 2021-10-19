@@ -57,7 +57,19 @@
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Приоритет" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black" FontWeight="Bold"/>
 
                 <TextBox Grid.Row="0" Grid.Column="1" x:Name="Name" VerticalAlignment="Center"/>
-                <TextBox Grid.Row="1" Grid.Column="1" x:Name="Description" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="Description"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Stretch"
+                         HorizontalAlignment="Stretch"
+                         MinWidth="280"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         SpellCheck.IsEnabled="True"
+                         materialDesign:HintAssist.Hint="Многострочное поле ввода"
+                         Height="80"
+                         Text="" />
+              
                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="Creation_date" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="3" Grid.Column="1" x:Name="Execution_date" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="4" Grid.Column="1" x:Name="Status" VerticalAlignment="Center"/>
