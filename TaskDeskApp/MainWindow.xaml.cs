@@ -12,45 +12,23 @@ namespace TaskDeskApp
     public partial class MainWindow : Window
     {
         private readonly ObservableCollection<TaskData> _collection;
-        private readonly ObservableCollection<ObservableCollection<TaskData>> _obsCollection;
+        private ObservableCollection<ObservableCollection<TaskData>> _obsCollection;
         private DataBase _dataBase;
 
-        private readonly ObservableCollection<ObservableCollection<TaskData>> _obsСollection;
-
+        /*ObservableCollection<ObservableCollection<TaskData>> _obsСollection;*/
 
 
         public MainWindow()
         {
             InitializeComponent();
             _dataBase = new DataBase();
-            _collection = new ObservableCollection<TaskData>
-            {
-                new() { Id = 1, Name = "Событие 1", Description = "" },
-                new() { Id = 2, Name = "Событие 2", Description = "" },
-                new() { Id = 3, Name = "Событие 3", Description = "" }
-            };
-            /*_collection1 = new ObservableCollection<TaskData>
-            {
-                new() { Id = 2, Name = "Событие 11", Description = "" },
-                new() { Id = 2, Name = "Событие 21", Description = "" },
-                new() { Id = 3, Name = "Событие 31", Description = "" }
-            };
-            _collection2 = new ObservableCollection<ObservableCollection<TaskData>>();
-            _collection2.Add(_collection);
-            _collection2.Add(_collection1);
-            for (int i = 2; i < 30; i++)
-            {
-                _collection2.Add(new ObservableCollection<TaskData>());
-            }*/
-            
             var data = _dataBase.ReadDataInTableAsync();
-            
             UserSelecedDate.SelectedDate = DateTime.Now;
-            PushListViewIntoGrid(2, 2, Calendar, _collection);
             _obsCollection = CompletionObservableCollection(data.Result, UserSelecedDate.SelectedDate.Value.Date.Year,
                 UserSelecedDate.SelectedDate.Value.Date.Month);
             CalendarReDraw(_obsCollection);
         }
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             /*var temp = GetDayofWeek(2021, 10);
@@ -170,11 +148,10 @@ namespace TaskDeskApp
                 {
                     try
                     {
-                        for (int i = 0; i < _obsСollection.Count; i++)
+                        for (int i = 0; i < _obsCollection.Count; i++)
                         {
-                            _obsСollection[i]?.Remove((TaskData)list.SelectedItem);    
+                            _obsCollection[i]?.Remove((TaskData)list.SelectedItem);
                         }
-                        
                     }
                     catch (Exception e)
                     {
@@ -184,7 +161,8 @@ namespace TaskDeskApp
             }
         }
 
-        private ObservableCollection<ObservableCollection<TaskData>> CompletionObservableCollection(List<TaskData> data,int year,int month)
+        private ObservableCollection<ObservableCollection<TaskData>> CompletionObservableCollection(List<TaskData> data,
+            int year, int month)
         {
             ObservableCollection<ObservableCollection<TaskData>> endData =
                 new ObservableCollection<ObservableCollection<TaskData>>();
@@ -192,6 +170,7 @@ namespace TaskDeskApp
             {
                 endData.Add(new ObservableCollection<TaskData>());
             }
+
             var cultureInfo = new CultureInfo("de-DE");
             foreach (var task in data)
             {
@@ -201,8 +180,10 @@ namespace TaskDeskApp
                     endData[dateTime.Day].Add(task);
                 }
             }
+
             return endData;
         }
+
         private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Вы уверены, что хотите удалить событие?", "Удаление записи", MessageBoxButton.OKCancel,
@@ -217,5 +198,13 @@ namespace TaskDeskApp
            MessageBox.Show("Работает");
            Event2.Items.Add(new ListBoxItem().Content="Задача 2");
         }*/
+        private void UserSelecedDate_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            _dataBase = new DataBase();
+            var data = _dataBase.ReadDataInTableAsync();
+            _obsCollection = CompletionObservableCollection(data.Result, UserSelecedDate.SelectedDate.Value.Date.Year,
+                UserSelecedDate.SelectedDate.Value.Date.Month);
+            CalendarReDraw(_obsCollection);
+        }
     }
 }

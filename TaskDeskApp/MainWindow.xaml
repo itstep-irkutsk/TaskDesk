@@ -69,7 +69,8 @@
                     x:Name="UserSelecedDate"
                     Width="140"
                     materialDesign:HintAssist.Hint="Pick Date"
-                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+                    SelectedDateChanged="UserSelecedDate_OnSelectedDateChanged"/>
                 
                 <Button
                     Style="{StaticResource MaterialDesignRaisedButton}"
