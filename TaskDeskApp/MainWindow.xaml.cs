@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -10,27 +12,28 @@ namespace TaskDeskApp
     public partial class MainWindow : Window
     {
         private readonly ObservableCollection<TaskData> _collection;
-        private readonly ObservableCollection<TaskData> _collection1;
+        private readonly ObservableCollection<ObservableCollection<TaskData>> _obsCollection;
+        private DataBase _dataBase;
 
-        private readonly ObservableCollection<ObservableCollection<TaskData>> _collection2;
+        private readonly ObservableCollection<ObservableCollection<TaskData>> _obsСollection;
 
 
 
         public MainWindow()
         {
             InitializeComponent();
-           
+            _dataBase = new DataBase();
             _collection = new ObservableCollection<TaskData>
             {
-                new() { id = 1, name = "Событие 1", description = "" },
-                new() { id = 2, name = "Событие 2", description = "" },
-                new() { id = 3, name = "Событие 3", description = "" }
+                new() { Id = 1, Name = "Событие 1", Description = "" },
+                new() { Id = 2, Name = "Событие 2", Description = "" },
+                new() { Id = 3, Name = "Событие 3", Description = "" }
             };
-            _collection1 = new ObservableCollection<TaskData>
+            /*_collection1 = new ObservableCollection<TaskData>
             {
-                new() { id = 2, name = "Событие 11", description = "" },
-                new() { id = 2, name = "Событие 21", description = "" },
-                new() { id = 3, name = "Событие 31", description = "" }
+                new() { Id = 2, Name = "Событие 11", Description = "" },
+                new() { Id = 2, Name = "Событие 21", Description = "" },
+                new() { Id = 3, Name = "Событие 31", Description = "" }
             };
             _collection2 = new ObservableCollection<ObservableCollection<TaskData>>();
             _collection2.Add(_collection);
@@ -38,12 +41,13 @@ namespace TaskDeskApp
             for (int i = 2; i < 30; i++)
             {
                 _collection2.Add(new ObservableCollection<TaskData>());
-            }
+            }*/
             
-
+            var data = _dataBase.ReadDataInTableAsync();
+            _obsCollection = CompletionObservableCollection(data.Result, 2021, 10);
             UserSelecedDate.SelectedDate = DateTime.Now;
             PushListViewIntoGrid(2, 2, Calendar, _collection);
-            CalendarReDraw(_collection2);
+            CalendarReDraw(_obsCollection);
         }
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
@@ -120,11 +124,11 @@ namespace TaskDeskApp
         {
             var gridColumnID = new GridViewColumn
             {
-                DisplayMemberBinding = new Binding("id"),
+                DisplayMemberBinding = new Binding("Id"),
             };
             var gridColumnName = new GridViewColumn
             {
-                DisplayMemberBinding = new Binding("EventName"),
+                DisplayMemberBinding = new Binding("Name"),
             };
 
             var gridView = new GridView();
@@ -164,9 +168,9 @@ namespace TaskDeskApp
                 {
                     try
                     {
-                        for (int i = 0; i < _collection2.Count; i++)
+                        for (int i = 0; i < _obsСollection.Count; i++)
                         {
-                            _collection2[i]?.Remove((TaskData)list.SelectedItem);    
+                            _obsСollection[i]?.Remove((TaskData)list.SelectedItem);    
                         }
                         
                     }
@@ -178,6 +182,25 @@ namespace TaskDeskApp
             }
         }
 
+        private ObservableCollection<ObservableCollection<TaskData>> CompletionObservableCollection(List<TaskData> data,int year,int month)
+        {
+            ObservableCollection<ObservableCollection<TaskData>> endData =
+                new ObservableCollection<ObservableCollection<TaskData>>();
+            for (int i = 0; i < 31; i++)
+            {
+                endData.Add(new ObservableCollection<TaskData>());
+            }
+            var cultureInfo = new CultureInfo("de-DE");
+            foreach (var task in data)
+            {
+                var dateTime = DateTime.Parse(task.ExecutionDate, cultureInfo);
+                if (dateTime.Year == year && dateTime.Month == month)
+                {
+                    endData[dateTime.Day].Add(task);
+                }
+            }
+            return endData;
+        }
         private void ButtonDelete_OnClick(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Вы уверены, что хотите удалить событие?", "Удаление записи", MessageBoxButton.OKCancel,
