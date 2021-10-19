@@ -39,7 +39,8 @@ namespace TaskDeskApp
                             }
                         };*/
             Month1 = new();
-            dataGrid1.DataContext = Month1.Weeks;
+            //dataGrid1.DataContext = Month1.Weeks;
+
             //DataContext = Month.Weeks;
             //listView1.ItemsSource = Month.Weeks;
 
@@ -59,10 +60,12 @@ namespace TaskDeskApp
 
         private void dataGrid1_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            dataGrid1.RowHeight = (dataGrid1.ActualHeight - dataGrid1.ColumnHeaderHeight - 2) / 6;
+            dataGrid1.RowHeight = (dataGrid1.ActualHeight - dataGrid1.ColumnHeaderHeight - 4) / 6;
             //MessageBox.Show(((double)dataGrid1.ColumnHeaderHeight).ToString());
             //DataGrid tempDataGrid = (DataGrid)sender;
             //tempDataGrid.RowHeight = tempDataGrid.Height +50;
+            //MessageBox.Show($"{dataGrid1.ActualHeight}, {dataGrid1.ColumnHeaderHeight}");
+
         }
     }
     /*    public class Month
@@ -152,17 +155,35 @@ namespace TaskDeskApp
         public int Saturday { get; set; }
         public int Sunday { get; set; }
     }
-/*    public class WithPercentageConverter : IValueConverter
+    /*    public class WithPercentageConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+
+                return ((DateTime)value).ToString("dd.MM.yyyy");
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            {
+                return DependencyProperty.UnsetValue;
+            }
+        }*/
+    public class RowHeightConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-
-            return ((DateTime)value).ToString("dd.MM.yyyy");
+            //dataGrid1.RowHeight = (dataGrid1.ActualHeight - dataGrid1.ColumnHeaderHeight - 2) / 6;
+            //if (value == null) return null;
+            //DataGrid dataGrid = value as DataGrid;
+            //MessageBox.Show($"{values[0].ToString()}, {values[1].ToString()}");
+            if (((double)values[0] - (double)values[1] - 2) / 6 < 0)
+            {
+                return 1;
+            } else return ((double)values[0] - (double)values[1] - 4) / 6;
         }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
-            return DependencyProperty.UnsetValue;
+            throw new NotSupportedException();
         }
-    }*/
+    }
 }

@@ -9,14 +9,46 @@
         mc:Ignorable="d"
         Title="Планировщик задач" Height="650" Width="800">
     <Window.Resources>
-        <Style TargetType="{x:Type DataGridColumnHeader}">
+        <col:ArrayList x:Key="week1">
+            <local:Week Monday="27" Tuesday="28" Wednesday="29" Thursday="30" Friday="1" Saturday="2" Sunday="3">
+            </local:Week>
+            <local:Week Monday="4" Tuesday="5" Wednesday="6" Thursday="7" Friday="8" Saturday="9" Sunday="10">
+            </local:Week>
+            <local:Week Monday="11" Tuesday="12" Wednesday="13" Thursday="14" Friday="15" Saturday="16" Sunday="17">
+            </local:Week>
+            <local:Week Monday="18" Tuesday="19" Wednesday="20" Thursday="21" Friday="22" Saturday="23" Sunday="24">
+            </local:Week>
+            <local:Week Monday="25" Tuesday="26" Wednesday="27" Thursday="28" Friday="29" Saturday="30" Sunday="31">
+            </local:Week>
+            <local:Week Monday="1" Tuesday="2" Wednesday="3" Thursday="4" Friday="5" Saturday="6" Sunday="7">
+            </local:Week>
+        </col:ArrayList>
+        <local:RowHeightConverter x:Key="rowHeightConverter"/>
+        <!--<Style TargetType="DataGrid">
+            <Setter Property="ColumnHeaderHeight" Value="25"/>
+            Grid.Row="1"
+                      AutoGenerateColumns="False"
+                      ColumnHeaderHeight="25"
+                      SizeChanged="dataGrid1_SizeChanged"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Disabled"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"
+                      CanUserReorderColumns="False"
+                      CanUserSortColumns="False"
+                      CanUserAddRows="False"
+                      SelectionUnit="Cell"
+                      SelectionMode="Single"
+                      RowHeaderWidth="0"
+                      Margin="5"
+                      GridLinesVisibility="None">
+        </Style>-->
+        <!--<Style TargetType="{x:Type DataGridColumnHeader}">
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="Height" Value="35" />
             <Setter Property="SeparatorBrush" Value="DarkRed" />
-            <Setter Property="SeparatorBrush">
-            </Setter>
             <Setter Property="FontWeight" Value="Light" />
-        </Style>
+        </Style>-->
     </Window.Resources>
     <Grid x:Name="mainGrid" ShowGridLines="False">
         <Grid.ColumnDefinitions>
@@ -48,25 +80,19 @@
                 <Button x:Name="buttonPrevMonth"  Grid.Column="0" Content="Предыдущий месяц" Click="buttonPrevMonth_Click"/>
                 <Button x:Name="buttonNextMonth" Grid.Column="1" Content="Следующий месяц" Click="buttonNextMonth_Click"/>
             </Grid>
+
             <DataGrid x:Name="dataGrid1"
                       Grid.Row="1"
-                      ItemsSource="{Binding}"
-                      AutoGenerateColumns="False"
-                      ColumnHeaderHeight="25"
-                      SizeChanged="dataGrid1_SizeChanged"
-                      HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Disabled"
-                      CanUserResizeColumns="False"
-                      CanUserResizeRows="False"
-                      CanUserReorderColumns="False"
-                      CanUserSortColumns="False"
+                      ItemsSource="{StaticResource week1}"
                       CanUserAddRows="False"
-                      SelectionUnit="Cell"
-                      SelectionMode="Single"
-                      RowHeaderWidth="0"
-                      Margin="5"
-                      GridLinesVisibility="None">
-                <DataGrid.Columns>
+                      ColumnHeaderHeight="25">
+                <DataGrid.RowHeight>
+                    <MultiBinding Converter="{StaticResource rowHeightConverter}">
+                        <Binding Path="ActualHeight"  RelativeSource="{RelativeSource Mode=Self}"/>
+                        <Binding Path="ColumnHeaderHeight"  RelativeSource="{RelativeSource Mode=Self}"/>
+                    </MultiBinding>
+                </DataGrid.RowHeight>
+                <!--<DataGrid.Columns>
                     <DataGridTextColumn Width="*" Header="Понедельник" Binding="{Binding Monday}"></DataGridTextColumn>
                     <DataGridTextColumn Width="*" Header="Вторник" Binding="{Binding Tuesday}"></DataGridTextColumn>
                     <DataGridTextColumn Width="*" Header="Среда" Binding="{Binding Wednesday}"></DataGridTextColumn>
@@ -74,7 +100,21 @@
                     <DataGridTextColumn Width="*" Header="Пятница" Binding="{Binding Friday}"></DataGridTextColumn>
                     <DataGridTextColumn Width="*" Header="Суббота" Binding="{Binding Saturday}"></DataGridTextColumn>
                     <DataGridTextColumn Width="*" Header="Воскресенье" Binding="{Binding Sunday}"></DataGridTextColumn>
-                </DataGrid.Columns>
+                </DataGrid.Columns>-->
+                <!--<DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="SeparatorBrush" Value="Red"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ContentPresenter Content="{TemplateBinding}">
+                                    </ContentPresenter>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>-->
             </DataGrid>
         </Grid>
     </Grid>
