@@ -19,8 +19,8 @@ namespace DataBaseLib
         public TaskData() 
         {
             var taskData = new DataBase();
-            /*statusDic = taskData.ReqvestDict(taskData.namesBdAndTables.nameTableStatus);
-            priorityDic = taskData.ReqvestDict(taskData.namesBdAndTables.nameTablePriority);*//**/
+            statusDic = taskData.ReqvestDict(taskData.namesBdAndTables.nameTableStatus);
+            priorityDic = taskData.ReqvestDict(taskData.namesBdAndTables.nameTablePriority);
         }
     }
 }
